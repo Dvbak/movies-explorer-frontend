@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import Header from './components/Header/Header';
 import Main from './components/Main/Main';
-// import Movies from './components/Movies';
+import Movies from './components/Movies/Movies';
 // import SavedMovies from './components/SavedMovies';
 import Profile from './components/Profile/Profile';
 import Login from './components/Login/Login';
@@ -15,6 +15,7 @@ import './App.css';
 function App() {
   const navigate = useNavigate();
   const [loggedIn, setLoggedIn] = useState(true);
+  const [isEdit, setIsEdit] = useState(false);
 
   function logOut() {
     setLoggedIn(false);
@@ -33,10 +34,14 @@ function App() {
             <div className='wrapper'>
               <Header
                 name={'profile'}
+                isEdit={isEdit}
+                setIsEdit={setIsEdit}
               />
               <Profile
                 name={'profile'}
                 logOut={logOut}
+                isEdit={isEdit}
+                setIsEdit={setIsEdit}
               />
             </div>
           } />
@@ -51,7 +56,16 @@ function App() {
               <Footer />
             </div>
           } />
-          {/* <Route path='/movies' element={<Movies />} /> */}
+          <Route path='/movies' element={
+            <div className='wrapper'>
+              <Header
+              name={'movies'}
+              // loggedIn={'true'}
+              loggedIn={loggedIn}
+              />
+              <Movies />
+            </div>
+          } />
           {/* <Route path='/saved-movies' element={<SavedMovies />} /> */}
           <Route path='*' element={<Error404 />} />
         </Routes>

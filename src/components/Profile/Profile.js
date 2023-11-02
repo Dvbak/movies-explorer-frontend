@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import Input from "../Input/Input";
 import useFormValidation from '../../hooks/useFormValidtion';
@@ -6,12 +6,12 @@ import './Profile.css';
 
 function Profile(props) {
   const isError = false;
-  const [isEdit, setIsEdit] = useState(false);
+  // const [isEdit, setIsEdit] = useState(false);
   const { values, errors, isInputValid, isValid, handleChange, reset } = useFormValidation();
 
   useEffect(() => {
     reset({ username: 'currentUser.name', email: 'currentUser.email' })
-  }, [reset, isEdit]);
+  }, [reset, props.isEdit]);
 
   function onSubmit(evt) {
     evt.preventDefault()
@@ -33,7 +33,8 @@ function Profile(props) {
           isInputValid={isInputValid.username}
           error={errors.username}
           onChange={handleChange}
-          isEdit={isEdit}
+          isEdit={props.isEdit}
+          // isEdit={isEdit}
         />
         <Input
           componentName={props.name}
@@ -44,18 +45,20 @@ function Profile(props) {
           isInputValid={isInputValid.email}
           error={errors.email}
           onChange={handleChange}
-          // pattern={EmailRegex}
-          isEdit={isEdit}
+          isEdit={props.isEdit}
+          // isEdit={isEdit}
         />
         </fieldset>
-        {!isEdit ?
+        {!props.isEdit ?
+        // {!isEdit ?
         <>
           <span className={`profile__error-form ${isError && 'profile__error-form_active'}`}>{isError ? 'При обновлении профиля произошла ошибка.' : 'Обновление профиля прошло успешно'}</span>
           <button
             type="button"
             className="profile__btn"
             onClick={() => {
-              setIsEdit(true);
+              props.setIsEdit(true);
+              // setIsEdit(true);
             }}
           >Редактировать</button>
         </> :
@@ -65,7 +68,8 @@ function Profile(props) {
             type="submit"
             className="profile__btn-edit"
             onClick={() => {
-              setIsEdit(false);
+              props.setIsEdit(false);
+              // setIsEdit(false);
             }}
             disabled={!isValid || isError}
           >Сохранить</button>

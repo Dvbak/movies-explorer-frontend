@@ -50,7 +50,11 @@ function Header(props) {
                 </li>
               </ul>
             </nav>
-            <Link to={'/profile'} className="header__account">
+            <Link to={'/profile'}
+              className="header__account"
+              onClick={() => {
+              // props.setIsEdit(false);
+            }}>
               Аккаунт
               <img
                 src={props.name !== 'home' ? logoAccount : logoAccountHome}
