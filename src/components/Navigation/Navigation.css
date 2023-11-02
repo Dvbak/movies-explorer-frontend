@@ -1,0 +1,149 @@
+.navigation  {
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, .3);
+  opacity: 0;
+  visibility: hidden;
+  transition: all .7s;
+}
+
+.navigation_opened {
+  visibility: visible;
+  opacity: 1;
+  z-index: 1;
+}
+
+.navigation__box {
+  box-sizing: border-box;
+  padding: 27px 25px 93px;
+  position: fixed;
+  right: -520px;
+  top: 0;
+  height: 100vh;
+  width: 520px;
+  background-color: #202020;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform .7s;
+  /* transition: all .7s; */
+  /* z-index: 1; */
+}
+
+.navigation.navigation_opened .navigation__box {
+  transform: translateX(-520px);
+}
+
+.navigation__btn-close {
+  align-self: flex-end;
+  background-image: url(../../images/logo/nav-close.svg);
+  background-position: center;
+  border: none;
+  padding: 0;
+  background-color: transparent;
+  width: 22px;
+  height: 22px;
+  margin-bottom: 111px;
+  cursor: pointer;
+  transition: opacity .3s;
+}
+
+.navigation__btn-close:hover {
+  opacity: .7;
+}
+
+.navigation__list {
+  flex-grow: 1;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.navigation__item {
+  padding-bottom: 23px;
+}
+
+.navigation__item:last-of-type {
+  padding-bottom: 0;
+}
+
+.navigation__link {
+  display: block;
+  text-decoration: none;
+  color: #FFF;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.22;
+  padding-bottom: 4px;
+  transition: opacity .3s;
+}
+
+.navigation__link:hover {
+  opacity: .7;
+}
+
+.navigation__link:focus {
+  outline: .1px solid #fff;
+}
+
+.navigation__link_active {
+  border-bottom: 1.5px solid #fff;
+}
+
+.navigation__account {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1;
+  transition: opacity .3s;
+  padding-bottom: 2px;
+  margin-left: 7px;
+}
+
+.navigation__account:hover {
+  opacity: .7;
+}
+
+.navigation__account:focus {
+  outline: .1px solid #fff;
+}
+
+.navigation__account_active {
+  border-bottom: 1.5px solid #fff;
+}
+
+.navigation__pic {
+  width: 26px;
+  height: 26px;
+  margin-left: 7px;
+  border-radius: 50%;
+}
+
+@media screen and (max-width: 520px) {
+  .navigation__box {
+    width: 100%;
+    padding: 19px 19px 49px;
+  }
+
+  .navigation__btn-close {
+    margin-bottom: 104px;
+  }
+
+  .navigation__item {
+    padding-bottom: 17.5px;
+  }
+
+  .navigation__link {
+    padding-bottom: 6px;
+  }
+}

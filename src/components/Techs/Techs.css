@@ -1,0 +1,149 @@
+.techs {
+  box-sizing: border-box;
+  max-width: 1280px;
+  background: #272727;
+  padding: 100px 70px;
+}
+
+.techs__subtitle {
+  margin: 0;
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.23;
+  letter-spacing: -0.88px;
+  padding-bottom: 23px;
+  border-bottom: 1px solid #dadada;
+  margin-bottom: 90px;
+}
+
+.techs__title {
+  margin: 0;
+  text-align: center;
+  font-size: 50px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.16;
+  letter-spacing: -2px;
+  padding-bottom: 26px;
+}
+
+.techs__text {
+  margin: auto;
+  max-width: 460px;
+  text-align: center;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.43;
+  letter-spacing: -0.56px;
+  padding-bottom: 100px;
+}
+
+.techs__inner {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.techs__link {
+  display: inline-block;
+  width: 90px;
+  padding-bottom: 21px;
+  padding-top: 22px;
+  background: #303030;
+  border-radius: 10px;
+  text-align: center;
+  text-decoration: none;
+  color: rgba(255, 255, 255, 1);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.21;
+  letter-spacing: -0.56px;
+  transition: color .3s, scale .3s;
+}
+
+.techs__link:hover {
+  color: rgba(255, 255, 255, .7);
+  scale: 1.1;
+}
+
+@media screen and (max-width: 768px) {
+  .techs {
+    padding: 90px 50px 87px;
+  }
+
+  .techs__subtitle {
+    margin-bottom: 80px;
+  }
+
+  .techs__title {
+    padding-bottom: 22px;
+  }
+
+  .techs__text {
+    font-size: 12px;
+    line-height: 1.5;
+    letter-spacing: -0.48px;
+    padding-bottom: 83px;
+  }
+
+  .techs__inner {
+    flex-wrap: wrap;
+  }
+
+  .techs__link {
+    width: 84px;
+    padding-top: 21px;
+    font-size: 12px;
+    line-height: 1.25;
+    letter-spacing: -0.48px;
+  }
+}
+
+@media screen and (max-width: 354px) {
+  .techs {
+    padding: 70px 18px;
+  }
+
+  .techs__subtitle {
+    font-size: 18px;
+    line-height: 1.22;
+    letter-spacing: -0.72px;
+    padding-bottom: 28px;
+    margin-bottom: 60px;
+  }
+
+  .techs__title {
+    font-size: 30px;
+    line-height: 1.2;
+    letter-spacing: -1.2px;
+    padding-bottom: 24px;
+  }
+
+  .techs__text {
+    max-width: 292px;
+    font-size: 11px;
+    line-height: 1.45;
+    letter-spacing: -0.44px;
+    padding-bottom: 50px;
+  }
+
+  .techs__inner {
+    justify-content: start;
+    padding-left: calc((100vw - 214px)/2);
+    padding-right: calc((100vw - 214px)/2);
+  }
+
+  .techs__link {
+    width: 84px;
+    padding-top: 21px;
+    font-size: 12px;
+    line-height: 1.25;
+    letter-spacing: -0.48px;
+  }
+}

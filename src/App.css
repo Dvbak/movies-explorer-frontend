@@ -1,4 +1,10 @@
-.App {
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+/* .App {
   text-align: center;
 }
 
@@ -35,4 +41,4 @@
   to {
     transform: rotate(360deg);
   }
-}
+} */
