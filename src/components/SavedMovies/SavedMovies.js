@@ -1,11 +1,11 @@
 import React from 'react';
 // import { Link } from "react-router-dom";
-// import './Moviies.css';
+// import './SavedMovies.css';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Footer from '../Footer/Footer';
 
-function Moviies() {
+function SavedMovies() {
   return (
     <>
       <SearchForm />
@@ -15,4 +15,4 @@ function Moviies() {
   )
 }
 
-export default Moviies;
+export default SavedMovies;

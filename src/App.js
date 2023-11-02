@@ -4,7 +4,7 @@ import { Route, Routes, useNavigate } from 'react-router-dom';
 import Header from './components/Header/Header';
 import Main from './components/Main/Main';
 import Movies from './components/Movies/Movies';
-// import SavedMovies from './components/SavedMovies';
+import SavedMovies from './components/SavedMovies/SavedMovies';
 import Profile from './components/Profile/Profile';
 import Login from './components/Login/Login';
 import Register from './components/Register/Register';
@@ -66,7 +66,17 @@ function App() {
               <Movies />
             </div>
           } />
-          {/* <Route path='/saved-movies' element={<SavedMovies />} /> */}
+          <Route path='/saved-movies' element={
+            <div className='wrapper'>
+              <Header
+              name={'saved-movies'}
+              // loggedIn={'true'}
+              loggedIn={loggedIn}
+              />
+              <SavedMovies />
+            </div>
+          } />
+
           <Route path='*' element={<Error404 />} />
         </Routes>
   );

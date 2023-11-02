@@ -3,6 +3,7 @@
   align-items: center;
   position: relative;
   cursor: pointer;
+  transition: opacity .3s;
 }
 
 .search-form__checkbox {
@@ -30,14 +31,18 @@
   fill: #fff;
 }
 
-.search-form__label:hover .search-form__svg-check-rect {
+.search-form__label:hover {
+  opacity: .7;
+}
+
+/* .search-form__label:hover .search-form__svg-check-rect {
   fill: #3DDC84;
 }
 
 .search-form__label:hover .search-form__svg-check-circle {
   translate: 16px 0;
   fill: #fff;
-}
+} */
 
 .search-form__label-text {
   display: inline-block;

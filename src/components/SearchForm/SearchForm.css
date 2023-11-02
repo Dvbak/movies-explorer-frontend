@@ -5,12 +5,13 @@
 }
 
 .search-form {
+  max-width: 1280px;
   box-sizing: border-box;
   padding: 70px 70px 47px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: start;
+  align-items: flex-start;
 }
 
 .search-form__form {
