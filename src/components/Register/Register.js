@@ -7,12 +7,13 @@ function Register(props) {
   const { values, errors, isInputValid, isValid, handleChange, } = useFormValidation()
 
   function onSubmit(evt) {
-    evt.preventDefault()
+    evt.preventDefault();
+    props.setIsWait(true);
     // props.onRegister(values.username, values.email, values.password)
   }
 
   return (
-    <SectionLogin name={props.name} onSubmit={onSubmit} isValid={isValid}>
+    <SectionLogin name={props.name} onSubmit={onSubmit} isValid={isValid} isWait={props.isWait}>
       <Input
         name='username'
         type='text'

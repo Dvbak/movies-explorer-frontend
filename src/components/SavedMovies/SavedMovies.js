@@ -5,11 +5,17 @@ import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Footer from '../Footer/Footer';
 
-function SavedMovies() {
+function SavedMovies(props) {
   return (
     <>
-      <SearchForm />
-      <MoviesCardList />
+      <SearchForm
+        isWait={props.isWait}
+        setIsWait={props.setIsWait}
+      />
+      <MoviesCardList
+        isWait={props.isWait}
+        setIsWait={props.setIsWait}
+      />
       <Footer />
     </>
   )

@@ -14,8 +14,11 @@ import './App.css';
 
 function App() {
   const navigate = useNavigate();
+  // const [isCheckToken, setIsCheckToken] = useState(false);
   const [loggedIn, setLoggedIn] = useState(true);
+  const [isError, setIsError] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
+  const [isWait, setIsWait] = useState(false);
 
   function logOut() {
     setLoggedIn(false);
@@ -23,62 +26,72 @@ function App() {
   }
 
   return (
-        <Routes>
-          <Route path='/signin' element={<Login
-            name={'signin'}
-          />} />
-          <Route path='/signup' element={<Register
-            name={'signup'}
-          />} />
-          <Route path='/profile' element={
-            <div className='wrapper'>
-              <Header
-                name={'profile'}
-                isEdit={isEdit}
-                setIsEdit={setIsEdit}
-              />
-              <Profile
-                name={'profile'}
-                logOut={logOut}
-                isEdit={isEdit}
-                setIsEdit={setIsEdit}
-              />
-            </div>
-          } />
-          <Route path='/' element={
-            <div className='wrapper'>
-              <Header
-                name={'home'}
-                // loggedIn={'true'}
-                loggedIn={loggedIn}
-              />
-              <Main />
-              <Footer />
-            </div>
-          } />
-          <Route path='/movies' element={
-            <div className='wrapper'>
-              <Header
+      <Routes>
+        <Route path='/signin' element={<Login
+          name={'signin'}
+          isWait={isWait}
+          setIsWait={setIsWait}
+        />} />
+        <Route path='/signup' element={<Register
+          name={'signup'}
+          isWait={isWait}
+          setIsWait={setIsWait}
+        />} />
+        <Route path='/profile' element={
+          <div className='wrapper'>
+            <Header
+              name={'profile'}
+              isEdit={isEdit}
+              setIsEdit={setIsEdit}
+            />
+            <Profile
+              name={'profile'}
+              isError={isError}
+              setIsError={setIsError}
+              isEdit={isEdit}
+              setIsEdit={setIsEdit}
+              logOut={logOut}
+              isWait={isWait}
+              setIsWait={setIsWait}
+            />
+          </div>
+        } />
+        <Route path='/' element={
+          <div className='wrapper'>
+            <Header
+              name={'home'}
+              loggedIn={loggedIn}
+            />
+            <Main />
+            <Footer />
+          </div>
+        } />
+        <Route path='/movies' element={
+          <div className='wrapper'>
+            <Header
               name={'movies'}
-              // loggedIn={'true'}
               loggedIn={loggedIn}
-              />
-              <Movies />
-            </div>
-          } />
-          <Route path='/saved-movies' element={
-            <div className='wrapper'>
-              <Header
-              name={'saved-movies'}
-              // loggedIn={'true'}
-              loggedIn={loggedIn}
-              />
-              <SavedMovies />
-            </div>
-          } />
-
-          <Route path='*' element={<Error404 />} />
-        </Routes>
+            />
+            <Movies
+              isWait={isWait}
+              setIsWait={setIsWait}
+            />
+          </div>
+        } />
+        <Route path='/saved-movies' element={
+          <div className='wrapper'>
+            <Header
+            name={'saved-movies'}
+            loggedIn={loggedIn}
+            />
+            <SavedMovies
+              isWait={isWait}
+              setIsWait={setIsWait}
+            />
+          </div>
+        } />
+        <Route path='*' element={<Error404 />} />
+      </Routes>
   );
 }
 

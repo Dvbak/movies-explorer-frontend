@@ -5,10 +5,10 @@ function FilterCheckBox() {
   const [click, setClick] = useState(false);
 
   function onClick() {
-    if(!click) {
-      setClick(true)
-    } else {
+    if(click) {
       setClick(false)
+    } else {
+      setClick(true)
     }
   };
 

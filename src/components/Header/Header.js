@@ -11,10 +11,16 @@ function Header(props) {
   const [isOpenBurgerMenu, setIsOpenBurgerMenu] = useState(false);
 
   function handleClick() {
-    if (isOpenBurgerMenu) {
+    if(isOpenBurgerMenu) {
       setIsOpenBurgerMenu(false);
     } else {
       setIsOpenBurgerMenu(true);
+    }
+  }
+
+  function onClick() {
+    if(props.isEdit) {
+      props.setIsEdit(false);
     }
   }
 
@@ -52,9 +58,8 @@ function Header(props) {
             </nav>
             <Link to={'/profile'}
               className="header__account"
-              onClick={() => {
-              // props.setIsEdit(false);
-            }}>
+              onClick={onClick}
+              >
               Аккаунт
               <img
                 src={props.name !== 'home' ? logoAccount : logoAccountHome}

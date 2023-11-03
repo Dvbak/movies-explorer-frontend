@@ -1,20 +1,27 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Input from "../Input/Input";
 import useFormValidation from '../../hooks/useFormValidtion';
 import './Profile.css';
 
 function Profile(props) {
-  const isError = false;
-  // const [isEdit, setIsEdit] = useState(false);
+  const[isLuck, setIsLuck] = useState(false);
   const { values, errors, isInputValid, isValid, handleChange, reset } = useFormValidation();
 
   useEffect(() => {
     reset({ username: 'currentUser.name', email: 'currentUser.email' })
   }, [reset, props.isEdit]);
 
+  // useEffect(() => {
+  //   props.setIsError(false)
+  // }, [props, props.setIsError, values]);
+
   function onSubmit(evt) {
-    evt.preventDefault()
+    evt.preventDefault();
+    props.setIsEdit(false);
+    setIsLuck(true);
+    props.setIsWait(true);
+    // props.setIsError(!props.isError);
     // editUserData(values.username, values.email)
   }
 
@@ -32,9 +39,12 @@ function Profile(props) {
           value={values.username}
           isInputValid={isInputValid.username}
           error={errors.username}
-          onChange={handleChange}
+          // onChange={handleChange}
+          onChange={(evt) => {
+            handleChange(evt)
+            props.setIsError(false)
+          }}
           isEdit={props.isEdit}
-          // isEdit={isEdit}
         />
         <Input
           componentName={props.name}
@@ -44,35 +54,34 @@ function Profile(props) {
           value={values.email}
           isInputValid={isInputValid.email}
           error={errors.email}
-          onChange={handleChange}
+          // onChange={handleChange}
+          onChange={(evt) => {
+            handleChange(evt)
+            props.setIsError(false)
+          }}
           isEdit={props.isEdit}
-          // isEdit={isEdit}
         />
         </fieldset>
         {!props.isEdit ?
-        // {!isEdit ?
         <>
-          <span className={`profile__error-form ${isError && 'profile__error-form_active'}`}>{isError ? 'При обновлении профиля произошла ошибка.' : 'Обновление профиля прошло успешно'}</span>
+          <span className={`profile__error-form ${props.isError ? 'profile__error-form_active' : isLuck ? 'profile__error-form-luke_active' : ''}`}>{props.isError ? 'При обновлении профиля произошла ошибка.' : 'Обновление профиля прошло успешно'}</span>
           <button
             type="button"
             className="profile__btn"
             onClick={() => {
               props.setIsEdit(true);
-              // setIsEdit(true);
+              setIsLuck(false);
+              // props.setIsError(false);
             }}
           >Редактировать</button>
         </> :
           <>
-          <span className={`profile__error-form ${isError && 'profile__error-form_active'}`}>{isError ? 'При обновлении профиля произошла ошибка.' : 'Обновление профиля прошло успешно'}</span>
+          <span className={`profile__error-form ${props.isError ? 'profile__error-form_active' : isLuck ? 'profile__error-form-luke_active' : ''}`}>{props.isError ? 'При обновлении профиля произошла ошибка.' : 'Обновление профиля прошло успешно'}</span>
           <button
             type="submit"
             className="profile__btn-edit"
-            onClick={() => {
-              props.setIsEdit(false);
-              // setIsEdit(false);
-            }}
-            disabled={!isValid || isError}
-          >Сохранить</button>
+            disabled={!isValid || props.isError}
+          >{props.isWait ? 'Ждите...' : 'Сохранить'}</button>
         </>
         }
       </form>

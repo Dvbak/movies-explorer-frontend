@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import './SectionLogin.css';
 
 function SectionLogin(props) {
-const isError = false;
+  const isError = false;
 
   return (
     <section className="page__login login">
@@ -19,7 +19,7 @@ const isError = false;
           type="submit"
           className="login__btn"
           disabled={!props.isValid}>
-          {props.name === 'signin' ? 'Войти' : 'Зарегистрироваться'}
+          {props.isWait ? 'Ждите...' : props.name === 'signin' ? 'Войти' : 'Зарегистрироваться'}
         </button>
       </form>
       {props.name === 'signin' ?

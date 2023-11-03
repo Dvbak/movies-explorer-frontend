@@ -2,10 +2,15 @@ import React from 'react';
 import FilterCheckBox from '../FilterCheckBox/FilterCheckBox';
 import './SearchForm.css';
 
-function SearchForm() {
+function SearchForm(props) {
+  function onSubmit(evt) {
+    evt.preventDefault();
+    props.setIsWait(true);
+  }
+
   return (
     <div className="search-form page__search-form">
-      <form action="#" className="search-form__form" noValidate="">
+      <form onSubmit={onSubmit} className="search-form__form" noValidate="">
         <input
           type="text"
           name="film"

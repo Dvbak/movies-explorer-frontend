@@ -118,6 +118,11 @@
   visibility: visible;
 }
 
+.profile__error-form-luke_active {
+  visibility: visible;
+  color: #fff;
+}
+
 .profile__btn{
   box-sizing: border-box;
   border: none;
