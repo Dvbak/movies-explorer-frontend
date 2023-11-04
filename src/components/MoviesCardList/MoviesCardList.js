@@ -12,7 +12,7 @@ function MoviesCardList(props) {
     <>
       {props.isWait ? <Preloader /> :
         pathname === '/movies' ?
-        <ul className="movies__list page__movies-list">
+        <ul className="movies__list">
           {data.map(item => {
             return (
               <MoviesCard
@@ -22,7 +22,7 @@ function MoviesCardList(props) {
             })
           }
         </ul> :
-          <ul className="movies__list page__movies-list">
+          <ul className="movies__list">
           {dataSaved.map(item => {
             return (
               <MoviesCard

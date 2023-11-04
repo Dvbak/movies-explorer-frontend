@@ -10,7 +10,7 @@ function SearchForm(props) {
   }
 
   return (
-    <div className="search-form page__search-form">
+    <div className="search-form">
       <form onSubmit={onSubmit} className="search-form__form" noValidate>
         <input
           required
