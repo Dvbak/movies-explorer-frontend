@@ -19,7 +19,7 @@ function Input(props) {
             pattern={props.pattern}
             placeholder={props.placeholder}
           />
-          <span className={`login__error-input ${props.isInputValid ? '' : 'login__error-input_active'}`}>{props.error}</span>
+          <span className='login__error-input' >{props.error}</span>
         </>
         :
         <>

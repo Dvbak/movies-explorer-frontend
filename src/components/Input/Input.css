@@ -44,10 +44,6 @@
   color: #EE3465;
 }
 
-.login__error-input_active {
-  padding-top: 10px;
-}
-
 .profile__label {
   position: relative;
   width: 100%;
@@ -108,8 +104,4 @@
   line-height: 1.2;
   color: #EE3465;
   /* width: 75%; */
-}
-
-.profile__error-input_active {
-  padding-top: 10px;
 }

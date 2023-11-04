@@ -3,6 +3,7 @@ import FilterCheckBox from '../FilterCheckBox/FilterCheckBox';
 import './SearchForm.css';
 
 function SearchForm(props) {
+
   function onSubmit(evt) {
     evt.preventDefault();
     props.setIsWait(true);
@@ -10,12 +11,12 @@ function SearchForm(props) {
 
   return (
     <div className="search-form page__search-form">
-      <form onSubmit={onSubmit} className="search-form__form" noValidate="">
+      <form onSubmit={onSubmit} className="search-form__form" noValidate>
         <input
+          required
           type="text"
           name="film"
           placeholder="Фильм"
-          required=""
           defaultValue=""
           className="search-form__input"
         />

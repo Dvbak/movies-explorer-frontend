@@ -20,7 +20,7 @@
   padding: 0;
 }
 
-.portfolio__item {
+/* .portfolio__item {
   display: flex;
   justify-content: space-between;
   font-size: 30px;
@@ -28,6 +28,12 @@
   font-weight: 400;
   line-height: 1.67;
   letter-spacing: -1.2px;
+  padding-bottom: 19px;
+  border-bottom: 1px solid #424242;
+  margin-bottom: 20px;
+} */
+
+.portfolio__item {
   padding-bottom: 19px;
   border-bottom: 1px solid #424242;
   margin-bottom: 20px;
@@ -39,19 +45,46 @@
   border-bottom: none;
 }
 
+/* .portfolio__link {
+  display: inline-block;
+  text-decoration: none;
+  margin-top: 19px;
+  margin-right: 6px;
+  width: 18px;
+  height: 17px;
+  background-image: url(./images/logo/logo-arrow.svg);
+  background-size: cover;
+  transition: opacity .3s, translate .3s, scale .3s;
+  flex-shrink: 0;
+} */
+
 .portfolio__link {
+  display: flex;
+  justify-content: space-between;
+  text-decoration: none;
+  color: #fff;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.67;
+  letter-spacing: -1.2px;
+}
+
+.portfolio__link-image {
   display: inline-block;
   margin-top: 19px;
   margin-right: 6px;
   width: 18px;
   height: 17px;
-  background-image: url(../../images/logo/logo-arrow.svg);
-  background-size: cover;
   transition: opacity .3s, translate .3s, scale .3s;
   flex-shrink: 0;
 }
 
-.portfolio__link:hover {
+.portfolio__link:hover  {
+  opacity: .7;
+}
+
+.portfolio__link:hover .portfolio__link-image {
   opacity: .7;
   scale: 1.1;
   translate: 2px -2px;
@@ -70,7 +103,13 @@
     font-size: 28px;
     line-height: 1.785;
     letter-spacing: -1.12px;
-    margin-bottom: 19px;
+    margin-bottom: 20px;
+  }
+
+  .portfolio__link {
+    font-size: 28px;
+    line-height: 1.785;
+    letter-spacing: -1.12px;
   }
 }
 
@@ -80,22 +119,21 @@
     line-height: 1.43;
   }
 
-  .portfolio__item {
+  .portfolio__link {
     font-size: 18px;
     line-height: 1.55;
     letter-spacing: -0.72px;
   }
 
-  .portfolio__link {
+  .portfolio__link-image {
     margin-top: 10px;
-    width: 12.7px;
     height: 12px;
   }
 }
 
 @media screen and (max-width: 320px) {
   .portfolio {
-    padding: 0 14px 72px;
+    padding: 0 14px 78px;
   }
 
   .portfolio__title {
@@ -103,11 +141,12 @@
   }
 
   .portfolio__item {
-    margin-bottom: 19px;
+    margin-bottom: 20px;
   }
 
-  .portfolio__link {
+  .portfolio__link-image {
     margin-top: 7px;
     margin-right: 4px;
   }
 }
+
