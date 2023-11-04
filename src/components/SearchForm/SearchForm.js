@@ -1,12 +1,20 @@
 import React from 'react';
 import FilterCheckBox from '../FilterCheckBox/FilterCheckBox';
+import useFormValidation from '../../hooks/useFormValidtion';
 import './SearchForm.css';
 
 function SearchForm(props) {
+  const { values, handleChange } = useFormValidation();
+
 
   function onSubmit(evt) {
     evt.preventDefault();
-    props.setIsWait(true);
+    if (evt.target.search.value) {
+      props.setIsWait(true);
+      props.setIsError(false);
+    } else {
+      props.setIsError(true);
+    }
   }
 
   return (
@@ -15,9 +23,13 @@ function SearchForm(props) {
         <input
           required
           type="text"
-          name="film"
+          name="search"
           placeholder="Фильм"
-          defaultValue=""
+          value={values.search || ''}
+            onChange={(evt) => {
+              handleChange(evt)
+              props.setIsError(false)
+            }}
           className="search-form__input"
         />
         <button type="submit" className="search-form__submit">
@@ -47,6 +59,7 @@ function SearchForm(props) {
           </svg>
         </button>
       </form>
+      <span className={`search-form__error ${props.isError && 'search-form__error_active'}`}>{'Введите ключевую фразу'}</span>
       <FilterCheckBox />
     </div>
   )

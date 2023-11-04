@@ -29,7 +29,7 @@ function Header(props) {
   // }
 
   return (
-    <header className={`header page__header ${props.name === 'home' ? 'page__color' : ''}`}>
+    <header className={`header page__center ${props.name === 'home' ? 'page__color' : ''}`}>
       <LinkHome className={'header__link-home'} />
       {props.name === 'home' && !props.loggedIn ?
         <nav className="header__nav-logout" >

@@ -5,16 +5,18 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 
 function Moviies(props) {
   return (
-    <>
+    <section className="movies" aria-label="Фотогалерея фильмов">
       <SearchForm
         isWait={props.isWait}
         setIsWait={props.setIsWait}
+        isError={props.isError}
+        setIsError={props.setIsError}
       />
       <MoviesCardList
         isWait={props.isWait}
         setIsWait={props.setIsWait}
       />
-    </>
+    </section>
   )
 }
 

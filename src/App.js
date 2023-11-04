@@ -3,12 +3,6 @@ import { useState } from 'react';
 import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
 import Header from './components/Header/Header';
 import Main from './components/Main/Main';
-// import Movies from './components/Movies/Movies';
-// import SavedMovies from './components/SavedMovies/SavedMovies';
-// import Profile from './components/Profile/Profile';
-// import Login from './components/Login/Login';
-// import Register from './components/Register/Register';
-// import Error404 from './components/Error404/Error404';
 import Footer from './components/Footer/Footer';
 import './App.css';
 
@@ -80,6 +74,8 @@ function App() {
               name={'movies'}
               isWait={isWait}
               setIsWait={setIsWait}
+              isError={isError}
+              setIsError={setIsError}
             />
             <Footer />
           </div>
@@ -94,6 +90,8 @@ function App() {
               name={'savedmovies'}
               isWait={isWait}
               setIsWait={setIsWait}
+              isError={isError}
+              setIsError={setIsError}
             />
             <Footer />
           </div>

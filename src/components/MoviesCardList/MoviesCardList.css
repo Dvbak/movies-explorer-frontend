@@ -51,6 +51,10 @@
     padding: 70px 30px 30px;
     gap: 33px 30px;
   }
+
+  .movies__next {
+    padding: 47px 70px 79px;
+  }
 }
 
 @media screen and (max-width: 399px) {

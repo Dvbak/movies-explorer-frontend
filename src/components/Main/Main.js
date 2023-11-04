@@ -16,7 +16,7 @@ import Error404 from "../Error404/Error404";
 
 function Main(props) {
   return (
-    <main className="main page__main">
+    <main className="main page__center">
     {
       props.name === 'home' ?
       <>
@@ -53,11 +53,15 @@ function Main(props) {
       <Moviies
         isWait={props.isWait}
         setIsWait={props.setIsWait}
+        isError={props.isError}
+        setIsError={props.setIsError}
       />
       : props.name === 'savedmovies' ?
       <SavedMovies
         isWait={props.isWait}
         setIsWait={props.setIsWait}
+        isError={props.isError}
+        setIsError={props.setIsError}
       />
       : props.name === 'error404' &&
       <Error404/>
