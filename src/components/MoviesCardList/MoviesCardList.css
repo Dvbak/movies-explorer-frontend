@@ -8,6 +8,17 @@
   gap: 28px 20px;
 }
 
+.movies__search-error {
+  display: block;
+  margin: auto;
+  min-height: 17px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.21;
+  color: #FF004C;
+}
+
 .movies__next {
   padding: 48px 70px 80px;
   display: flex;

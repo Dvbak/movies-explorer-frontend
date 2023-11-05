@@ -51,6 +51,7 @@ function MoviesCardList(props) {
             })
           }
         </ul> :
+        pathname === '/saved-movies' ?
           <ul className="movies__list">
           {dataSaved.map(item => {
             return (
@@ -60,10 +61,13 @@ function MoviesCardList(props) {
               />)
             })
           }
-          </ul>
+          </ul> :
+          props.serverError &&
+          <span className='movies__search-error'>Во время запроса произошла ошибка. Подождите немного и попробуйте ещё раз.
+          </span>
       }
       <div className="movies__next">
-        {(pathname === '/movies' && !props.isWait) && <button
+        {(pathname === '/movies' && !props.isWait && !props.serverError) && <button
           type="button"
           className={`movies__next-btn ${count >= data.length && 'movies__next-btn_hidden'}`}
           onClick={clickNext}
