@@ -1,0 +1,127 @@
+.portfolio {
+  box-sizing: border-box;
+  max-width: 1280px;
+  padding: 0 70px 125px;
+}
+
+.portfolio__title {
+  margin: 0;
+  color: #8B8B8B;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.11;
+  padding-bottom: 50px;
+}
+
+.portfolio__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.portfolio__item {
+  padding-bottom: 19px;
+  border-bottom: 1px solid #424242;
+  margin-bottom: 20px;
+}
+
+.portfolio__item:last-of-type {
+  padding: 0;
+  margin: 0;
+  border-bottom: none;
+}
+
+.portfolio__link {
+  display: flex;
+  justify-content: space-between;
+  text-decoration: none;
+  color: #fff;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.67;
+  letter-spacing: -1.2px;
+  transition: opacity .3s;
+}
+
+.portfolio__link-image {
+  display: inline-block;
+  margin-top: 19px;
+  margin-right: 6px;
+  width: 18px;
+  height: 17px;
+  transition: opacity .3s, translate .3s, scale .3s;
+  flex-shrink: 0;
+}
+
+.portfolio__link:hover  {
+  opacity: .7;
+}
+
+.portfolio__link:hover .portfolio__link-image {
+  opacity: .7;
+  scale: 1.1;
+  translate: 2px -2px;
+}
+
+@media screen and (max-width: 768px) {
+  .portfolio {
+    padding: 0 50px 90px;
+  }
+
+  .portfolio__title {
+    color: #a0a0a0;
+  }
+
+  .portfolio__item {
+    font-size: 28px;
+    line-height: 1.785;
+    letter-spacing: -1.12px;
+    margin-bottom: 20px;
+  }
+
+  .portfolio__link {
+    font-size: 28px;
+    line-height: 1.785;
+    letter-spacing: -1.12px;
+  }
+}
+
+@media screen and (max-width: 544px) {
+  .portfolio__title {
+    font-size: 14px;
+    line-height: 1.43;
+  }
+
+  .portfolio__link {
+    font-size: 18px;
+    line-height: 1.55;
+    letter-spacing: -0.72px;
+  }
+
+  .portfolio__link-image {
+    margin-top: 10px;
+    height: 12px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .portfolio {
+    padding: 0 14px 78px;
+  }
+
+  .portfolio__title {
+    padding-bottom: 40px;
+  }
+
+  .portfolio__item {
+    margin-bottom: 20px;
+  }
+
+  .portfolio__link-image {
+    margin-top: 7px;
+    margin-right: 4px;
+  }
+}
+

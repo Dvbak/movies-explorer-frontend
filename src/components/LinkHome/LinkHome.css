@@ -1,0 +1,25 @@
+.link-home {
+  display: inline-block;
+  flex-shrink: 0;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.link-home__svg-bc {
+  transition: opacity .3s;
+}
+
+.link-home:hover .link-home__svg-bc {
+  opacity: .7;
+}
+
+.link-home__svg {
+  transition: scale .5s, rotate .5s;
+}
+
+.link-home:hover .link-home__svg {
+  scale: 1.25;
+  rotate: 360deg;
+}
