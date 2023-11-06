@@ -29,23 +29,23 @@ function Main(props) {
       : props.name === 'signin' ?
       <Login
         name={props.name}
-        isWait={props.isWait}
+        setIsError={props.setIsError}
         setIsWait={props.setIsWait}
       />
       : props.name ==='signup' ?
       <Register
         name={props.name}
-        isWait={props.isWait}
+        setIsError={props.setIsError}
         setIsWait={props.setIsWait}
       />
       : props.name === 'profile' ?
       <Profile
         name={props.name}
-        isError={props.isError}
+        logOut={props.logOut}
+        // isError={props.isError}
         setIsError={props.setIsError}
         isEdit={props.isEdit}
         setIsEdit={props.setIsEdit}
-        logOut={props.logOut}
         isWait={props.isWait}
         setIsWait={props.setIsWait}
       />

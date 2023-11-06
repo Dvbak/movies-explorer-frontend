@@ -1,16 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Input from "../Input/Input";
 import useFormValidation from '../../hooks/useFormValidtion';
 import './Profile.css';
+import CurrentUserContext from "../../context/CurrentUserContext";
+import ErrorContext from "../../context/ErrorContext";
+import WaitContext from "../../context/WaitContext";
 
 function Profile(props) {
+  const currentUser = useContext(CurrentUserContext);
+  const isError = useContext(ErrorContext);
+  const isWait = useContext(WaitContext);
   const[isLuck, setIsLuck] = useState(false);
   const { values, errors, isInputValid, isValid, handleChange, reset } = useFormValidation();
 
   useEffect(() => {
-    reset({ username: 'currentUser.name', email: 'currentUser.email' })
-  }, [reset, props.isEdit]);
+    reset({ username: currentUser.name, email: currentUser.email })
+  }, [reset, currentUser, props.isEdit]);
 
   // useEffect(() => {
   //   props.setIsError(false)
@@ -27,7 +33,7 @@ function Profile(props) {
 
   return (
     <section className="profile page__profile">
-      <h2 className="profile__title">Привет, currentUser!</h2>
+      <h2 className="profile__title">{`Привет, ${currentUser.name}!`}</h2>
       <form onSubmit={onSubmit} className="profile__form" noValidate>
         <fieldset className="profile__fieldset">
           <Input
@@ -64,7 +70,7 @@ function Profile(props) {
         </fieldset>
         {!props.isEdit ?
         <>
-          <span className={`profile__error-form ${props.isError ? 'profile__error-form_active' : isLuck ? 'profile__error-form-luke_active' : ''}`}>{props.isError ? 'При обновлении профиля произошла ошибка.' : 'Обновление профиля прошло успешно'}</span>
+          <span className={`profile__error-form ${isError ? 'profile__error-form_active' : isLuck ? 'profile__error-form-luke_active' : ''}`}>{isError ? 'При обновлении профиля произошла ошибка.' : 'Обновление профиля прошло успешно'}</span>
           <button
             type="button"
             className="profile__btn"
@@ -76,12 +82,12 @@ function Profile(props) {
           >Редактировать</button>
         </> :
           <>
-          <span className={`profile__error-form ${props.isError ? 'profile__error-form_active' : isLuck ? 'profile__error-form-luke_active' : ''}`}>{props.isError ? 'При обновлении профиля произошла ошибка.' : 'Обновление профиля прошло успешно'}</span>
+          <span className={`profile__error-form ${isError ? 'profile__error-form_active' : isLuck ? 'profile__error-form-luke_active' : ''}`}>{isError ? 'При обновлении профиля произошла ошибка.' : 'Обновление профиля прошло успешно'}</span>
           <button
             type="submit"
             className="profile__btn-edit"
-            disabled={!isValid || props.isError}
-          >{props.isWait ? 'Ждите...' : 'Сохранить'}</button>
+            disabled={!isValid || isWait || isError}
+          >{isWait ? 'Ждите...' : 'Сохранить'}</button>
         </>
         }
       </form>

@@ -13,7 +13,7 @@ function Register(props) {
   }
 
   return (
-    <SectionLogin name={props.name} onSubmit={onSubmit} isValid={isValid} isWait={props.isWait}>
+    <SectionLogin name={props.name} setIsError={props.setIsError} onSubmit={onSubmit} isValid={isValid} values={values}>
       <Input
         name='username'
         type='text'
@@ -25,7 +25,7 @@ function Register(props) {
         error={errors.username}
         onChange={(evt) => {
           handleChange(evt)
-          // props.setIsError(false)
+          props.setIsError(false)
         }}
         placeholder='Введите имя'
       />
@@ -38,7 +38,7 @@ function Register(props) {
         error={errors.email}
         onChange={(evt) => {
           handleChange(evt)
-          // props.setIsError(false)
+          props.setIsError(false)
         }}
         placeholder='Введите электронную почту'
       />
@@ -46,13 +46,13 @@ function Register(props) {
         name='password'
         type='password'
         title='Пароль'
-        minLength='3'
+        minLength='8'
         value={values.password}
         isInputValid={isInputValid.password}
         error={errors.password}
         onChange={(evt) => {
           handleChange(evt)
-          // props.setIsError(false)
+          props.setIsError(false)
         }}
         placeholder='Введите пароль'
       />

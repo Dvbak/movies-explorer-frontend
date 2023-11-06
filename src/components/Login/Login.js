@@ -2,6 +2,7 @@ import React from 'react';
 import SectionLogin from '../SectionLogin/SectionLogin';
 import Input from '../Input/Input';
 import useFormValidation from '../../hooks/useFormValidtion';
+// import WaitContext from '../../context/WaitContext';
 
 function Login(props) {
   const { values, errors, isInputValid, isValid, handleChange, } = useFormValidation()
@@ -13,7 +14,7 @@ function Login(props) {
   }
 
   return (
-    <SectionLogin name={props.name} onSubmit={onSubmit} isValid={isValid} isWait={props.isWait}>
+    <SectionLogin name={props.name} setIsError={props.setIsError} onSubmit={onSubmit} isValid={isValid} values={values}>
       <Input
         name='email'
         type='email'
@@ -23,7 +24,7 @@ function Login(props) {
         error={errors.email}
         onChange={(evt) => {
           handleChange(evt)
-          // props.setIsError(false)
+          props.setIsError(false)
         }}
         placeholder='Введите свою электронную почту'
       />
@@ -31,13 +32,13 @@ function Login(props) {
         name='password'
         type='password'
         title='Пароль'
-        minLength='3'
+        minLength='8'
         value={values.password}
         isInputValid={isInputValid.password}
         error={errors.password}
         onChange={(evt) => {
           handleChange(evt)
-          // props.setIsError(false)
+          props.setIsError(false)
         }}
         placeholder='Введите свой пароль'
       />

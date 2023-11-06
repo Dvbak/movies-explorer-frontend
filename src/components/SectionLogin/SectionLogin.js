@@ -1,10 +1,17 @@
-import React from "react";
-import LinkHome from '../LinkHome/LinkHome';
+import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
+import ErrorContext from "../../context/ErrorContext";
+import WaitContext from "../../context/WaitContext";
+import LinkHome from '../LinkHome/LinkHome';
 import './SectionLogin.css';
 
 function SectionLogin(props) {
-  const isError = false;
+  const isError = useContext(ErrorContext);
+  const isWait = useContext(WaitContext);
+
+  useEffect(() => {
+    props.setIsError(false)
+  }, [props, props.setIsError, props.values])
 
   return (
     <section className="page__login login">
@@ -18,8 +25,8 @@ function SectionLogin(props) {
         <button
           type="submit"
           className="login__btn"
-          disabled={!props.isValid}>
-          {props.isWait ? 'Ждите...' : props.name === 'signin' ? 'Войти' : 'Зарегистрироваться'}
+          disabled={!props.isValid || isWait || isError}>
+          {isWait ? 'Ждите...' : props.name === 'signin' ? 'Войти' : 'Зарегистрироваться'}
         </button>
       </form>
       {props.name === 'signin' ?

@@ -15,7 +15,7 @@ function Input(props) {
             className={`login__input ${props.isInputValid === undefined || props.isInputValid ? '' : 'login__input_invalid'}`}
             value={props.value || ''}
             onChange={props.onChange}
-            disabled={props.isSend}
+            disabled={props.isWait}
             pattern={props.pattern}
             placeholder={props.placeholder}
           />
@@ -33,7 +33,7 @@ function Input(props) {
               className={`profile__input ${props.isInputValid === undefined || props.isInputValid ? '' : 'profile__input_invalid'}`}
               value={props.value || ''}
               onChange={props.onChange}
-              disabled={props.isSend || !props.isEdit}
+              disabled={props.isWait || !props.isEdit}
               pattern={props.pattern}
               placeholder={props.placeholder}
             />
