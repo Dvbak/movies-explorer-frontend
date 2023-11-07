@@ -1,14 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+// import { useContext } from "react";
 import { Link, useLocation} from "react-router-dom";
 import LinkHome from "../LinkHome/LinkHome";
 import Navigation from "../Navigation/Navigation";
 import logoAccount from '../../images/logo/logo-icon-main.svg';
 import logoAccountHome from '../../images/logo/logo-icon-main-bc.svg';
 import './Header.css';
+// import CurrentUserContext from "../../context/CurrentUserContext";
 
-function Header(props) {
+function Header({setIsEdit, setIsLuck,...props}) {
   const { pathname } = useLocation();
+  // const currentUser = useContext(CurrentUserContext)
   const [isOpenBurgerMenu, setIsOpenBurgerMenu] = useState(false);
+
+  useEffect(() => {
+      if (pathname === '/profile') {
+        setIsEdit(false)
+        setIsLuck(false)
+      }
+    }, [setIsLuck, setIsEdit, pathname])
 
   function handleClick() {
     if(isOpenBurgerMenu) {
@@ -20,13 +30,12 @@ function Header(props) {
 
   function onClick() {
     if(props.isEdit) {
-      props.setIsEdit(false);
+      setIsEdit(false);
+      props.setIsError(false);
+    } else if (props.isLuck) {
+      setIsLuck(false);
     }
   }
-
-  // function closeBurgerMenu() {
-  //   setIsOpenBurgerMenu(false);
-  // }
 
   return (
     <header className={`header page__center ${props.name === 'home' ? 'page__color' : ''}`}>
@@ -61,6 +70,7 @@ function Header(props) {
               onClick={onClick}
               >
               Аккаунт
+              {/* {currentUser.name} */}
               <img
                 src={props.name !== 'home' ? logoAccount : logoAccountHome}
                 alt="Пиктограмма человека"

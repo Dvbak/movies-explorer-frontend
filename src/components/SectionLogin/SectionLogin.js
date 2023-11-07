@@ -5,13 +5,13 @@ import WaitContext from "../../context/WaitContext";
 import LinkHome from '../LinkHome/LinkHome';
 import './SectionLogin.css';
 
-function SectionLogin(props) {
+function SectionLogin({setIsError, ...props}) {
   const isError = useContext(ErrorContext);
   const isWait = useContext(WaitContext);
 
   useEffect(() => {
-    props.setIsError(false)
-  }, [props, props.setIsError, props.values])
+    setIsError(false)
+  }, [setIsError])
 
   return (
     <section className="page__login login">
@@ -21,7 +21,7 @@ function SectionLogin(props) {
         <fieldset className="login__fieldset">
           {props.children}
         </fieldset>
-        <span className={`login__error-form ${isError && 'login__error-form_active'}`}>{props.name === 'signin' ? 'При авторизации произошла ошибка.' : 'При регистрации пользователя произошла ошибка.'}</span>
+        <span className={`login__error-form ${isError ? 'login__error-form_active' : ''}`}>{props.name === 'signin' ? 'При авторизации произошла ошибка.' : 'При регистрации пользователя произошла ошибка.'}</span>
         <button
           type="submit"
           className="login__btn"

@@ -1,5 +1,4 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
 import Header from './components/Header/Header';
 import Main from './components/Main/Main';
@@ -8,22 +7,83 @@ import './App.css';
 import CurrentUserContext from './context/CurrentUserContext';
 import ErrorContext from './context/ErrorContext';
 import WaitContext from './context/WaitContext';
+import mainApi from './utils/MainApi';
+import Preloader from './components/Preloader/Preloader';
+import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
+import ProtectedPage from './components/ProtectedPage/ProtectedPage';
 
 function App() {
   const navigate = useNavigate();
   const [currentUser, setCurrentUser] = useState({});
   const [isError, setIsError] = useState(false);
   const [isWait, setIsWait] = useState(false);
-  // const [isCheckToken, setIsCheckToken] = useState(false);
   const [loggedIn, setLoggedIn] = useState(true);
   const [isEdit, setIsEdit] = useState(false);
+  const [isLuck, setIsLuck] = useState(false);
+  const [savedMovies, setSavedMovies] = useState([]);
+  const [isCheckToken, setIsCheckToken] = useState(true);
+
+  useEffect(() => {
+    if (localStorage.token) {
+      Promise.all([mainApi.getUserData(localStorage.token), mainApi.getMovies(localStorage.token)])
+        .then(([userData, dataMovies]) => {
+          setSavedMovies(dataMovies.reverse())
+          setCurrentUser(userData)
+          setLoggedIn(true)
+          setIsCheckToken(false)
+        })
+        .catch((err) => {
+          console.error(`Ошибка загрузки страницы- ${err}`)
+          setIsCheckToken(false)
+          localStorage.clear()
+        })
+    } else {
+      setLoggedIn(false)
+      setIsCheckToken(false)
+      localStorage.clear()
+    }
+  }, [loggedIn])
+
+  function handleLogin(email, password) {
+    setIsWait(true);
+    mainApi.authorization(email, password)
+      .then(res => {
+        localStorage.setItem('token', res.token);
+        setLoggedIn(true);
+        navigate('/movies');
+      })
+      .catch((err) => {
+        setIsError(true);
+        console.error(`Ошибка авторизации- ${err}`)
+      })
+      .finally(() => setIsWait(false))
+  }
+
+  function handleRegister(username, email, password) {
+    setIsWait(true)
+    mainApi.registration(username, email, password)
+      .then((res) => {
+        if (res) {
+          // setLoggedIn(false);
+          handleLogin(email, password);
+        }
+      })
+      .catch((err) => {
+        setIsError(true)
+        console.error(`Ошибка регистрации- ${err}`)
+      })
+      .finally(() => setIsWait(false))
+  }
 
   function logOut() {
+    localStorage.clear();
     setLoggedIn(false);
     navigate('/');
   }
 
   return (
+    <>
+    {isCheckToken ? <Preloader /> :
     <CurrentUserContext.Provider value={currentUser}>
       <WaitContext.Provider value={isWait}>
         <ErrorContext.Provider value={isError}>
@@ -32,34 +92,52 @@ function App() {
             loggedIn ? <Navigate to='/movies' replace /> :
               <Main
                 name={'signin'}
-                setIsError={setIsError}
-                setIsWait={setIsWait} />
+                onLogin={handleLogin}
+                setIsError={setIsError} />
             } />
             <Route path='/signup' element={
             loggedIn ? <Navigate to='/movies' replace /> :
               <Main
                 name={'signup'}
-                setIsError={setIsError}
-                setIsWait={setIsWait} />
+                onRegister={handleRegister}
+                setIsError={setIsError} />
             } />
             <Route path='/profile' element={
               <div className='wrapper'>
-                <Header
+                <ProtectedRoute
+                  element={ProtectedPage}
                   name={'profile'}
-                  isEdit={isEdit}
-                  setIsEdit={setIsEdit}
-                />
-                <Main
-                  name={'profile'}
-                  isError={isError}
-                  setIsError={setIsError}
-                  isEdit={isEdit}
-                  setIsEdit={setIsEdit}
                   logOut={logOut}
-                  isWait={isWait}
+                  loggedIn={loggedIn}
+                  setCurrentUser={setCurrentUser}
+                  setIsError={setIsError}
                   setIsWait={setIsWait}
+                  isEdit={isEdit}
+                  setIsEdit={setIsEdit}
+                  isLuck={isLuck}
+                  setIsLuck={setIsLuck}
                 />
               </div>
+              // <div className='wrapper'>
+              //   <Header
+              //     name={'profile'}
+              //     isEdit={isEdit}
+              //     setIsEdit={setIsEdit}
+              //     setIsError={setIsError}
+              //     setIsLuck={setIsLuck}
+              //   />
+              //   <Main
+              //     name={'profile'}
+              //     logOut={logOut}
+              //     setCurrentUser={setCurrentUser}
+              //     setIsError={setIsError}
+              //     setIsWait={setIsWait}
+              //     isEdit={isEdit}
+              //     setIsEdit={setIsEdit}
+              //     isLuck={isLuck}
+              //     setIsLuck={setIsLuck}
+              //   />
+              // </div>
             } />
             <Route path='/' element={
               <div className='wrapper'>
@@ -110,6 +188,8 @@ function App() {
         </ErrorContext.Provider>
       </WaitContext.Provider>
     </CurrentUserContext.Provider>
+  }
+  </>
   );
 }
 

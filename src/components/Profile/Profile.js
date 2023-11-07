@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Input from "../Input/Input";
 import useFormValidation from '../../hooks/useFormValidtion';
@@ -6,29 +6,43 @@ import './Profile.css';
 import CurrentUserContext from "../../context/CurrentUserContext";
 import ErrorContext from "../../context/ErrorContext";
 import WaitContext from "../../context/WaitContext";
+import mainApi from "../../utils/MainApi";
 
-function Profile(props) {
+function Profile({setIsError, setIsEdit, setIsLuck, ...props}) {
   const currentUser = useContext(CurrentUserContext);
   const isError = useContext(ErrorContext);
   const isWait = useContext(WaitContext);
-  const[isLuck, setIsLuck] = useState(false);
   const { values, errors, isInputValid, isValid, handleChange, reset } = useFormValidation();
 
   useEffect(() => {
     reset({ username: currentUser.name, email: currentUser.email })
+    console.log(currentUser.name);
   }, [reset, currentUser, props.isEdit]);
 
-  // useEffect(() => {
-  //   props.setIsError(false)
-  // }, [props, props.setIsError, values]);
+  useEffect(() => {
+    setIsError(false)
+  }, [setIsError, values]);
+
+  function handleProfile(username, email) {
+    props.setIsWait(true)
+    mainApi.setUserInfo(username, email, localStorage.token)
+      .then(res => {
+        props.setCurrentUser(res);
+        setIsEdit(false);
+        setIsLuck(true);
+        console.log(currentUser.name);
+      })
+      .catch((err) => {
+        setIsError(true);
+        console.error(`Ошибка редактирования профиля: ${err}`)
+      })
+      .finally(() => props.setIsWait(false))
+  }
 
   function onSubmit(evt) {
     evt.preventDefault();
-    props.setIsEdit(false);
-    setIsLuck(true);
-    props.setIsWait(true);
-    // props.setIsError(!props.isError);
-    // editUserData(values.username, values.email)
+    // props.onEditProfile(values.username, values.email);
+    handleProfile(values.username, values.email);
   }
 
   return (
@@ -48,7 +62,7 @@ function Profile(props) {
           // onChange={handleChange}
           onChange={(evt) => {
             handleChange(evt)
-            props.setIsError(false)
+            setIsError(false)
           }}
           isEdit={props.isEdit}
         />
@@ -63,26 +77,25 @@ function Profile(props) {
           // onChange={handleChange}
           onChange={(evt) => {
             handleChange(evt)
-            props.setIsError(false)
+            setIsError(false)
           }}
           isEdit={props.isEdit}
         />
         </fieldset>
         {!props.isEdit ?
         <>
-          <span className={`profile__error-form ${isError ? 'profile__error-form_active' : isLuck ? 'profile__error-form-luke_active' : ''}`}>{isError ? 'При обновлении профиля произошла ошибка.' : 'Обновление профиля прошло успешно'}</span>
+          <span className={`profile__error-form ${isError ? 'profile__error-form_active' : props.isLuck ? 'profile__error-form-luke_active' : ''}`}>{isError ? 'При обновлении профиля произошла ошибка.' : 'Обновление профиля прошло успешно'}</span>
           <button
             type="button"
             className="profile__btn"
             onClick={() => {
-              props.setIsEdit(true);
+              setIsEdit(true);
               setIsLuck(false);
-              // props.setIsError(false);
             }}
           >Редактировать</button>
         </> :
           <>
-          <span className={`profile__error-form ${isError ? 'profile__error-form_active' : isLuck ? 'profile__error-form-luke_active' : ''}`}>{isError ? 'При обновлении профиля произошла ошибка.' : 'Обновление профиля прошло успешно'}</span>
+          <span className={`profile__error-form ${isError ? 'profile__error-form_active' : props.isLuck ? 'profile__error-form-luke_active' : ''}`}>{isError ? 'При обновлении профиля произошла ошибка.' : 'Обновление профиля прошло успешно'}</span>
           <button
             type="submit"
             className="profile__btn-edit"

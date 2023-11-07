@@ -29,25 +29,27 @@ function Main(props) {
       : props.name === 'signin' ?
       <Login
         name={props.name}
+        onLogin={props.onLogin}
         setIsError={props.setIsError}
-        setIsWait={props.setIsWait}
       />
       : props.name ==='signup' ?
       <Register
         name={props.name}
+        onRegister={props.onRegister}
         setIsError={props.setIsError}
-        setIsWait={props.setIsWait}
       />
       : props.name === 'profile' ?
       <Profile
         name={props.name}
         logOut={props.logOut}
-        // isError={props.isError}
+        setCurrentUser={props.setCurrentUser}
+        // onEditProfile={props.onEditProfile}
         setIsError={props.setIsError}
+        setIsWait={props.setIsWait}
         isEdit={props.isEdit}
         setIsEdit={props.setIsEdit}
-        isWait={props.isWait}
-        setIsWait={props.setIsWait}
+        isLuck={props.isLuck}
+        setIsLuck={props.setIsLuck}
       />
       : props.name === 'movies' ?
       <Moviies

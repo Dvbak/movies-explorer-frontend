@@ -9,8 +9,8 @@ function Login(props) {
 
   function onSubmit(evt) {
     evt.preventDefault();
-    props.setIsWait(true);
-    // props.onLogin(values.email, values.password)
+    // props.setIsWait(true);
+    props.onLogin(values.email, values.password)
   }
 
   return (

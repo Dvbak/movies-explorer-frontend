@@ -8,8 +8,8 @@ function Register(props) {
 
   function onSubmit(evt) {
     evt.preventDefault();
-    props.setIsWait(true);
-    // props.onRegister(values.username, values.email, values.password)
+    // props.setIsWait(true);
+    props.onRegister(values.username, values.email, values.password)
   }
 
   return (
@@ -19,6 +19,7 @@ function Register(props) {
         type='text'
         title='Имя'
         minLength='3'
+        // maxLength='12'
         defaultValue=""
         value={values.username}
         isInputValid={isInputValid.username}
