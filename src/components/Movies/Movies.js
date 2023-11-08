@@ -11,7 +11,7 @@ function Moviies({setIsError, ...props}) {
   const [isCheck, setIsCheck] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isServerError, setIsServerError] = useState(false);
-  // const [firstEntrance, setFirstEntrance] = useState(true);
+  const [isFirstSearch, setIsFirstSearch] = useState(true);
 
   const select = useCallback((word, isCheck, movies) => {
     localStorage.setItem('inputword', JSON.stringify(word));
@@ -32,6 +32,7 @@ function Moviies({setIsError, ...props}) {
           setIsListMovies(res);
           setIsCheck(false);
           setIsServerError(false);
+          setIsFirstSearch(false);
           select(word, isCheck, res);
         })
         .catch(err => {
@@ -46,7 +47,7 @@ function Moviies({setIsError, ...props}) {
 
   useEffect(() => {
     setIsError(false)
-  }, [setIsError]);
+  }, [setIsError])
 
   useEffect(() => {
     if (localStorage.inputword && localStorage.shorts && localStorage.lotmovies) {
@@ -54,6 +55,7 @@ function Moviies({setIsError, ...props}) {
       const isCheck = JSON.parse(localStorage.shorts)
       const movies = JSON.parse(localStorage.lotmovies)
       setIsServerError(false)
+      setIsFirstSearch(false)
       setIsSearchWord(word)
       setIsCheck(isCheck)
       setIsListMovies(movies)
@@ -80,6 +82,7 @@ function Moviies({setIsError, ...props}) {
         isSelectedMovies={isSelectedMovies}
         isServerError={isServerError}
         isLoading={isLoading}
+        isFirstSearch={isFirstSearch}
         addMovie={props.addMovie}
         savedMovies={props.savedMovies}
       />

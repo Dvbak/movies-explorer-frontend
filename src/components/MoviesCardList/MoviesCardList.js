@@ -42,8 +42,10 @@ function MoviesCardList({isSelectedMovies, ...props}) {
 
   return (
     <>
-      {props.isLoading ? <Preloader /> :
-        (pathname === '/movies' && show.length !== 0) ?
+      {props.isLoading ? <Preloader />
+        : (props.isFirstSearch && pathname === '/movies') ?
+        <span className='movies__search-return'>«Выполните поиск фильмов»</span>
+        : (pathname === '/movies' && show.length !== 0) ?
         <ul className="movies__list">
           {show.map(item => {
             return (
@@ -56,7 +58,8 @@ function MoviesCardList({isSelectedMovies, ...props}) {
           }
         </ul>
         : (pathname === '/movies' && show.length === 0) ?
-        <span className='movies__search-return'>«Выполните, пожалуйста, поиск»</span>
+        <span className='movies__search-return'>«Ничего не найдено»</span>
+
         : (pathname === '/saved-movies' && isSelectedMovies.length !== 0) ?
           <ul className="movies__list">
           {isSelectedMovies.map(item => {
