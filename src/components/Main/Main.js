@@ -43,7 +43,6 @@ function Main(props) {
         name={props.name}
         logOut={props.logOut}
         setCurrentUser={props.setCurrentUser}
-        // onEditProfile={props.onEditProfile}
         setIsError={props.setIsError}
         setIsWait={props.setIsWait}
         isEdit={props.isEdit}
@@ -53,17 +52,17 @@ function Main(props) {
       />
       : props.name === 'movies' ?
       <Moviies
-        isWait={props.isWait}
-        setIsWait={props.setIsWait}
-        isError={props.isError}
+        savedMovies={props.savedMovies}
+        addMovies={props.addMovies}
         setIsError={props.setIsError}
+        isError={props.isError}
       />
       : props.name === 'savedmovies' ?
       <SavedMovies
-        isWait={props.isWait}
-        setIsWait={props.setIsWait}
-        isError={props.isError}
+        savedMovies={props.savedMovies}
+        onDelet={props.onDelet}
         setIsError={props.setIsError}
+        isError={props.isError}
       />
       : props.name === 'error404' &&
       <Error404/>

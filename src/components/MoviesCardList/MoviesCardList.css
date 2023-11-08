@@ -19,6 +19,18 @@
   color: #FF004C;
 }
 
+.movies__search-return {
+  display: block;
+  max-width: 320px;
+  margin: auto;
+  /* min-height: 17px; */
+  text-align: center;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.21;
+  color: #fff;
+}
+
 .movies__next {
   padding: 48px 70px 80px;
   display: flex;

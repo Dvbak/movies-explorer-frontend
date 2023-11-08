@@ -28,6 +28,7 @@ function App() {
       Promise.all([mainApi.getUserData(localStorage.token), mainApi.getMovies(localStorage.token)])
         .then(([userData, dataMovies]) => {
           setSavedMovies(dataMovies.reverse())
+          console.log(savedMovies)
           setCurrentUser(userData)
           setLoggedIn(true)
           setIsCheckToken(false)
@@ -75,6 +76,14 @@ function App() {
       .finally(() => setIsWait(false))
   }
 
+  function handleToggelMovie() {
+
+  }
+
+  function handleDeleteMovie() {
+
+  }
+
   function logOut() {
     localStorage.clear();
     setLoggedIn(false);
@@ -118,26 +127,6 @@ function App() {
                   setIsLuck={setIsLuck}
                 />
               </div>
-              // <div className='wrapper'>
-              //   <Header
-              //     name={'profile'}
-              //     isEdit={isEdit}
-              //     setIsEdit={setIsEdit}
-              //     setIsError={setIsError}
-              //     setIsLuck={setIsLuck}
-              //   />
-              //   <Main
-              //     name={'profile'}
-              //     logOut={logOut}
-              //     setCurrentUser={setCurrentUser}
-              //     setIsError={setIsError}
-              //     setIsWait={setIsWait}
-              //     isEdit={isEdit}
-              //     setIsEdit={setIsEdit}
-              //     isLuck={isLuck}
-              //     setIsLuck={setIsLuck}
-              //   />
-              // </div>
             } />
             <Route path='/' element={
               <div className='wrapper'>
@@ -151,32 +140,28 @@ function App() {
             } />
             <Route path='/movies' element={
               <div className='wrapper'>
-                <Header
-                  name={'movies'}
+                <ProtectedRoute
+                  element={ProtectedPage}
+                  name='movies'
                   loggedIn={loggedIn}
-                />
-                <Main
-                  name={'movies'}
-                  isWait={isWait}
-                  setIsWait={setIsWait}
                   isError={isError}
                   setIsError={setIsError}
+                  savedMovies={savedMovies}
+                  addMovie={handleToggelMovie}
                 />
                 <Footer />
               </div>
             } />
             <Route path='/saved-movies' element={
               <div className='wrapper'>
-                <Header
-                name={'saved-movies'}
-                loggedIn={loggedIn}
-                />
-                <Main
-                  name={'savedmovies'}
-                  isWait={isWait}
-                  setIsWait={setIsWait}
+                <ProtectedRoute
+                  element={ProtectedPage}
+                  name='savedmovies'
+                  loggedIn={loggedIn}
                   isError={isError}
                   setIsError={setIsError}
+                  savedMovies={savedMovies}
+                  onDelete={handleDeleteMovie}
                 />
                 <Footer />
               </div>

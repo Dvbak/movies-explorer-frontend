@@ -24,7 +24,7 @@ function MoviesCard(props) {
   return (
     <li className="movies__card">
       <Link to={props.data.trailerLink} target='_blank' className="movies__link">
-        <img src={props.data.image} alt={props.data.name} className="movies__img" />
+        <img src={`https://api.nomoreparties.co${props.data.image.url}`} alt={props.data.nameRU} className="movies__img" />
       </Link>
       <div className="movies__box-subtitle">
         <div className="movies__inner-subtitle">

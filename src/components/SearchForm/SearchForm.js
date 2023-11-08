@@ -1,19 +1,41 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import FilterCheckBox from '../FilterCheckBox/FilterCheckBox';
 import useFormValidation from '../../hooks/useFormValidtion';
 import './SearchForm.css';
+import ErrorContext from '../../context/ErrorContext';
+import { useLocation } from 'react-router-dom';
 
-function SearchForm(props) {
-  const { values, handleChange } = useFormValidation();
+function SearchForm({savedMovies, isSearchWord, ...props}) {
+  const { pathname } = useLocation();
+  const isError = useContext(ErrorContext);
+  const { values, handleChange, reset } = useFormValidation();
+
+  useEffect(() => {
+    if(pathname === '/saved-movies' && savedMovies === 0) {
+      reset({ search: '' })
+    } else {
+      reset({ search: isSearchWord })
+    }
+  }, [reset, pathname, savedMovies, isSearchWord]);
 
 
   function onSubmit(evt) {
     evt.preventDefault();
     if (evt.target.search.value) {
-      props.setIsWait(true);
+      props.searchMovies(evt.target.search.value);
       props.setIsError(false);
     } else {
       props.setIsError(true);
+    }
+  }
+
+  function checkShort() {
+    if (props.isCheck) {
+      props.setIsCheck(false);
+      props.select(values.search, false, props.isListMovies);
+    } else {
+      props.setIsCheck(true);
+      props.select(values.search, true, props.isListMovies);
     }
   }
 
@@ -30,6 +52,7 @@ function SearchForm(props) {
               handleChange(evt)
               props.setIsError(false)
             }}
+          disabled={props.savedMovie ? (props.savedMovie.length === 0 && true) : false}
           className="search-form__input"
         />
         <button type="submit" className="search-form__submit">
@@ -59,8 +82,11 @@ function SearchForm(props) {
           </svg>
         </button>
       </form>
-      <span className={`search-form__error ${props.isError && 'search-form__error_active'}`}>{'Введите ключевую фразу'}</span>
-      <FilterCheckBox />
+      <span className={`search-form__error ${isError && 'search-form__error_active'}`}>{'Введите ключевую фразу'}</span>
+      <FilterCheckBox
+        isCheck={props.isCheck}
+        checkShort={checkShort}
+      />
     </div>
   )
 }

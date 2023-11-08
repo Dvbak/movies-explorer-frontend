@@ -1,22 +1,25 @@
-import React, { useState } from 'react';
+// import React, { useState } from 'react';
 import './FilterCheckBox.css';
 
-function FilterCheckBox() {
-  const [click, setClick] = useState(false);
+function FilterCheckBox(props) {
+  // const [click, setClick] = useState(false);
 
-  function onClick() {
-    if(click) {
-      setClick(false)
-    } else {
-      setClick(true)
-    }
-  };
+  // function onClick() {
+  //   if(click) {
+  //     setClick(false)
+  //   } else {
+  //     setClick(true)
+  //   }
+  // };
+  function onChange() {
+    props.checkShort();
+  }
 
   return (
     <label
       className="search-form__label"
       tabIndex={0}>
-      <input type="checkbox" name="short films" className="search-form__checkbox" onClick={onClick}/>
+      <input type="checkbox" name="short films" className="search-form__checkbox" onChange={onChange}/>
       <svg
         className="search-form__svg-check"
         xmlns="http://www.w3.org/2000/svg"
@@ -27,14 +30,14 @@ function FilterCheckBox() {
 
       >
         <rect
-          className={`search-form__svg-check-rect ${click ? 'search-form__svg-check-rect_active' : ''}`}
+          className={`search-form__svg-check-rect ${props.isCheck ? 'search-form__svg-check-rect_active' : ''}`}
           width={36}
           height={20}
           rx={10}
           fill="#343434"
         />
         <circle
-          className={`search-form__svg-check-circle ${click ? 'search-form__svg-check-circle_active' : ''}`}
+          className={`search-form__svg-check-circle ${props.isCheck ? 'search-form__svg-check-circle_active' : ''}`}
           cx={10}
           cy={10}
           r={8}
