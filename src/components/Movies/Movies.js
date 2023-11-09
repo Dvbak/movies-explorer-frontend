@@ -1,5 +1,4 @@
 import React, { useCallback, useState, useEffect } from 'react';
-// import { Link } from "react-router-dom";
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import moviesApi from '../../utils/MoviesApi';
