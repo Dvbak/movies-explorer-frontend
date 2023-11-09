@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Input from "../Input/Input";
 import useFormValidation from '../../hooks/useFormValidtion';
@@ -13,25 +13,40 @@ function Profile({setIsError, setIsEdit, setIsLuck, ...props}) {
   const currentUser = useContext(CurrentUserContext);
   const isError = useContext(ErrorContext);
   const isWait = useContext(WaitContext);
+  const [isFormValid, setIsFormValid] = useState(true);
   const { values, errors, isInputValid, isValid, handleChange, reset } = useFormValidation();
 
   useEffect(() => {
-    reset({ username: currentUser.name, email: currentUser.email })
-    console.log(currentUser.name);
+    reset({ name: currentUser.name, email: currentUser.email })
+    console.log(currentUser);
   }, [reset, currentUser, props.isEdit]);
 
   useEffect(() => {
     setIsError(false)
   }, [setIsError, values]);
 
-  function handleProfile(username, email) {
+  useEffect(() => {
+    if (JSON.stringify(currentUser) === JSON.stringify(values)) {
+      setIsFormValid(false);
+      console.log(JSON.stringify(currentUser))
+      console.log(JSON.stringify(values))
+    } else {
+      setIsFormValid(true);
+    }
+  }, [setIsFormValid, currentUser, values])
+
+  function handleProfile(name, email) {
     props.setIsWait(true)
-    mainApi.setUserInfo(username, email, localStorage.token)
+    mainApi.setUserInfo(name, email, localStorage.token)
       .then(res => {
-        props.setCurrentUser(res);
+        props.setCurrentUser({
+          name: res.name,
+          email: res.email
+        });
+        console.log(res);
         setIsEdit(false);
         setIsLuck(true);
-        console.log(currentUser.name);
+        console.log(currentUser);
       })
       .catch((err) => {
         setIsError(true);
@@ -42,7 +57,7 @@ function Profile({setIsError, setIsEdit, setIsLuck, ...props}) {
 
   function onSubmit(evt) {
     evt.preventDefault();
-    handleProfile(values.username, values.email);
+    handleProfile(values.name, values.email);
   }
 
   return (
@@ -52,13 +67,13 @@ function Profile({setIsError, setIsEdit, setIsLuck, ...props}) {
         <fieldset className="profile__fieldset">
           <Input
           componentName={props.name}
-          name='username'
+          name='name'
           type='text'
           title='Имя'
           minLength='3'
-          value={values.username}
-          isInputValid={isInputValid.username}
-          error={errors.username}
+          value={values.name}
+          isInputValid={isInputValid.name}
+          error={errors.name}
           onChange={(evt) => {
             handleChange(evt)
             setIsError(false)
@@ -98,7 +113,7 @@ function Profile({setIsError, setIsEdit, setIsLuck, ...props}) {
           <button
             type="submit"
             className="profile__btn-edit"
-            disabled={!isValid || isWait || isError}
+            disabled={!isValid || isWait || isError || !isFormValid}
           >{isWait ? 'Ждите...' : 'Сохранить'}</button>
         </>
         }
