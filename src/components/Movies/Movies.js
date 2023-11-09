@@ -60,7 +60,6 @@ function Moviies({setIsError, ...props}) {
       setIsCheck(isCheck)
       setIsListMovies(movies)
       select(word, isCheck, movies)
-      // setFirstEntrance(false)
     }
   }, [select])
 
@@ -71,7 +70,7 @@ function Moviies({setIsError, ...props}) {
         isCheck={isCheck}
         setIsCheck={setIsCheck}
         isSearchWord={isSearchWord}
-        isListMovies={isListMovies}
+        movies={isListMovies}
         savedMovies={props.savedMovies}
         isError={props.isError}
         setIsError={setIsError}
@@ -85,6 +84,7 @@ function Moviies({setIsError, ...props}) {
         isFirstSearch={isFirstSearch}
         addMovie={props.addMovie}
         savedMovies={props.savedMovies}
+        onDelete={props.onDelete}
       />
     </section>
   )

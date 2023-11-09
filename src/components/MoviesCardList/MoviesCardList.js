@@ -9,10 +9,7 @@ import showCards from '../../utils/showCards';
 function MoviesCardList({isSelectedMovies, ...props}) {
   const { pathname } = useLocation();
   const [count, setCount] = useState('');
-  console.log(isSelectedMovies);
   const show = isSelectedMovies.slice(0, count);
-  // console.log(show);
-  // const show = data.slice(0, count);
 
   useEffect(() => {
     if (pathname === '/movies') {
@@ -43,8 +40,6 @@ function MoviesCardList({isSelectedMovies, ...props}) {
   return (
     <>
       {props.isLoading ? <Preloader />
-        : (props.isFirstSearch && pathname === '/movies') ?
-        <span className='movies__search-return'>«Выполните поиск фильмов»</span>
         : (pathname === '/movies' && show.length !== 0) ?
         <ul className="movies__list">
           {show.map(item => {
@@ -57,24 +52,25 @@ function MoviesCardList({isSelectedMovies, ...props}) {
             })
           }
         </ul>
-        : (pathname === '/movies' && show.length === 0) ?
-        <span className='movies__search-return'>«Ничего не найдено»</span>
-
         : (pathname === '/saved-movies' && isSelectedMovies.length !== 0) ?
           <ul className="movies__list">
           {isSelectedMovies.map(item => {
             return (
               <MoviesCard
-                key={item.id}
-                onDelet={props.onDelet}
+                key={item._id}
+                onDelete={props.onDelete}
                 data={item} />)
             })
           }
           </ul>
-          : (pathname === '/saved-movies' && isSelectedMovies.length === 0) ?
-          <span className='movies__search-return'>«Нет сохранённых фильмов»</span>
-          : props.isServerError &&
+          : props.isServerError ?
           <span className='movies__search-return'>«Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз»</span>
+          : !props.isFirstSearch  ?
+          <span className='movies__search-return'>«Ничего не найдено»</span>
+          : pathname === '/movies' ?
+          <span className='movies__search-return'>«Выполните поиск фильмов»</span>
+          :
+          <span className='movies__search-return'>«Нет сохранённых фильмов»</span>
       }
       <div className="movies__next">
         {(pathname === '/movies' && !props.isWait && !props.isServerError) && <button

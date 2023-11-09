@@ -7,6 +7,7 @@ function SavedMovies({savedMovies, setIsError, ...props}) {
   const [isSelectedMovies, setIsSelectedMovies] = useState(savedMovies);
   const [isSearchWord, setIsSearchWord] = useState('');
   const [isCheck, setIsCheck] = useState(false);
+  const [isFirstSearch, setIsFirstSearch] = useState(true);
 
   const select = useCallback((word, isCheck, movies) => {
     setIsSearchWord(word);
@@ -17,6 +18,7 @@ function SavedMovies({savedMovies, setIsError, ...props}) {
   }, []);
 
   function searchMovies(word) {
+    setIsFirstSearch(false);
     select(word, isCheck, savedMovies);
   }
 
@@ -25,6 +27,11 @@ function SavedMovies({savedMovies, setIsError, ...props}) {
   }, [setIsError])
 
   useEffect(() => {
+    if (savedMovies.length === 0) {
+      setIsFirstSearch(true)
+    } else {
+      setIsFirstSearch(false)
+    }
     select(isSearchWord, isCheck, savedMovies)
   }, [select, isCheck, isSearchWord, savedMovies])
 
@@ -32,16 +39,19 @@ function SavedMovies({savedMovies, setIsError, ...props}) {
     <section className="movies" aria-label="Фотогалерея фильмов">
       <SearchForm
         isCheck={isCheck}
+        isSearchWord={isSearchWord}
         setIsCheck={setIsCheck}
         isListMovies={isSelectedMovies}
         savedMovies={savedMovies}
+        movies={savedMovies}
         isError={props.isError}
         setIsError={setIsError}
         select={select}
         searchMovies={searchMovies}
       />
       <MoviesCardList
-        isSelectedMovies={savedMovies}
+        isSelectedMovies={isSelectedMovies}
+        isFirstSearch={isFirstSearch}
         onDelete={props.onDelete}
       />
     </section>

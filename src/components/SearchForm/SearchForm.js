@@ -32,10 +32,12 @@ function SearchForm({savedMovies, isSearchWord, ...props}) {
   function checkShort() {
     if (props.isCheck) {
       props.setIsCheck(false);
-      props.select(values.search, false, props.isListMovies);
+      props.setIsError(false);
+      props.select(values.search, false, props.movies);
     } else {
       props.setIsCheck(true);
-      props.select(values.search, true, props.isListMovies);
+      props.setIsError(false);
+      props.select(values.search, true, props.movies);
     }
   }
 
@@ -52,7 +54,7 @@ function SearchForm({savedMovies, isSearchWord, ...props}) {
               handleChange(evt)
               props.setIsError(false)
             }}
-          disabled={props.savedMovie ? (props.savedMovie.length === 0 && true) : false}
+          disabled={savedMovies ? (savedMovies.length === 0 && pathname === '/saved-movies') : false}
           className="search-form__input"
         />
         <button type="submit" className="search-form__submit">

@@ -53,14 +53,14 @@ function Main(props) {
       : props.name === 'movies' ?
       <Moviies
         savedMovies={props.savedMovies}
-        addMovies={props.addMovies}
+        addMovie={props.addMovie}
         setIsError={props.setIsError}
         isError={props.isError}
       />
       : props.name === 'savedmovies' ?
       <SavedMovies
         savedMovies={props.savedMovies}
-        onDelet={props.onDelet}
+        onDelete={props.onDelete}
         setIsError={props.setIsError}
         isError={props.isError}
       />

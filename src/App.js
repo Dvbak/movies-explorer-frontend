@@ -76,12 +76,28 @@ function App() {
       .finally(() => setIsWait(false))
   }
 
-  function handleToggelMovie() {
-
+  function handleAddMovie(data) {
+    const isAddition = savedMovies.some(item => data.id === item.movieId)
+    const currentMovie = savedMovies.filter((movie) => {
+      return movie.movieId === data.id
+    })
+    if (isAddition) {
+      handleDeleteMovie(currentMovie[0]._id)
+    } else {
+      mainApi.addMovie(data, localStorage.token)
+        .then(res => {
+          setSavedMovies([res, ...savedMovies])
+        })
+        .catch((err) => console.error(`Ошибка при выборе фильма- ${err}`))
+    }
   }
 
-  function handleDeleteMovie() {
-
+  function handleDeleteMovie(deletMovieId) {
+    mainApi.deleteMovie(deletMovieId, localStorage.token)
+    .then(() => {
+      setSavedMovies(savedMovies.filter(item => { return item._id !== deletMovieId }))
+    })
+    .catch((err) => console.error(`Ошибка при удалении фильма- ${err}`))
   }
 
   function logOut() {
@@ -147,7 +163,7 @@ function App() {
                   isError={isError}
                   setIsError={setIsError}
                   savedMovies={savedMovies}
-                  addMovie={handleToggelMovie}
+                  addMovie={handleAddMovie}
                 />
                 <Footer />
               </div>
