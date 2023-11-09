@@ -2,7 +2,7 @@ import React from 'react';
 import Input from '../Input/Input';
 import SectionLogin from '../SectionLogin/SectionLogin';
 import useFormValidation from '../../hooks/useFormValidtion';
-import { EmailRegex } from '../../utils/constants';
+import { EmailRegex, regPassword } from '../../utils/constants';
 
 function Register(props) {
   const { values, errors, isInputValid, isValid, handleChange, } = useFormValidation()
@@ -57,7 +57,8 @@ function Register(props) {
           handleChange(evt)
           props.setIsError(false)
         }}
-        placeholder='Введите пароль'
+        pattern={regPassword}
+        placeholder='Введите пароль, не менее 8 букв или цифр'
       />
     </SectionLogin>
   )
