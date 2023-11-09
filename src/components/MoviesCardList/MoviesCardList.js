@@ -39,7 +39,7 @@ function MoviesCardList({isSelectedMovies, ...props}) {
 
   return (
     <>
-      {props.isLoading ? <Preloader />
+      {props.isWait ? <Preloader />
         : (pathname === '/movies' && show.length !== 0) ?
         <ul className="movies__list">
           {show.map(item => {

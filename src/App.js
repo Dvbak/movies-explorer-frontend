@@ -28,7 +28,6 @@ function App() {
       Promise.all([mainApi.getUserData(localStorage.token), mainApi.getMovies(localStorage.token)])
         .then(([userData, dataMovies]) => {
           setSavedMovies(dataMovies.reverse())
-          console.log(savedMovies)
           setCurrentUser(userData)
           setLoggedIn(true)
           setIsCheckToken(false)
@@ -162,6 +161,7 @@ function App() {
                   loggedIn={loggedIn}
                   isError={isError}
                   setIsError={setIsError}
+                  setIsWait={setIsWait}
                   savedMovies={savedMovies}
                   addMovie={handleAddMovie}
                 />

@@ -54,6 +54,7 @@ function Main(props) {
       <Moviies
         savedMovies={props.savedMovies}
         addMovie={props.addMovie}
+        setIsWait={props.setIsWait}
         setIsError={props.setIsError}
         isError={props.isError}
       />

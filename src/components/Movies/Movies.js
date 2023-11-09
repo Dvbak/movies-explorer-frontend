@@ -1,14 +1,15 @@
-import React, { useCallback, useState, useEffect } from 'react';
+import React, { useCallback, useState, useEffect, useContext } from 'react';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import moviesApi from '../../utils/MoviesApi';
+import WaitContext from '../../context/WaitContext';
 
 function Moviies({setIsError, ...props}) {
+  const isWait = useContext(WaitContext);
   const [isListMovies, setIsListMovies] = useState([]);
   const [isSelectedMovies, setIsSelectedMovies] = useState([]);
   const [isSearchWord, setIsSearchWord] = useState('');
   const [isCheck, setIsCheck] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
   const [isServerError, setIsServerError] = useState(false);
   const [isFirstSearch, setIsFirstSearch] = useState(true);
 
@@ -25,7 +26,7 @@ function Moviies({setIsError, ...props}) {
 
   function searchMovies(word) {
     if (isListMovies.length === 0) {
-      setIsLoading(true)
+      props.setIsWait(true)
       moviesApi.getMovies()
         .then((res) => {
           setIsListMovies(res);
@@ -38,7 +39,7 @@ function Moviies({setIsError, ...props}) {
           setIsServerError(true);
           console.error(`Ошибка при поиске фильмов- ${err}`)
         })
-        .finally(() => setIsLoading(false))
+        .finally(() => props.setIsWait(false))
     } else {
       select(word, isCheck, isListMovies)
     }
@@ -79,8 +80,8 @@ function Moviies({setIsError, ...props}) {
       <MoviesCardList
         isSelectedMovies={isSelectedMovies}
         isServerError={isServerError}
-        isLoading={isLoading}
         isFirstSearch={isFirstSearch}
+        isWait={isWait}
         addMovie={props.addMovie}
         savedMovies={props.savedMovies}
         onDelete={props.onDelete}
