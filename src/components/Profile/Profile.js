@@ -7,6 +7,7 @@ import CurrentUserContext from "../../context/CurrentUserContext";
 import ErrorContext from "../../context/ErrorContext";
 import WaitContext from "../../context/WaitContext";
 import mainApi from "../../utils/MainApi";
+import { EmailRegex } from "../../utils/constants";
 
 function Profile({setIsError, setIsEdit, setIsLuck, ...props}) {
   const currentUser = useContext(CurrentUserContext);
@@ -41,7 +42,6 @@ function Profile({setIsError, setIsEdit, setIsLuck, ...props}) {
 
   function onSubmit(evt) {
     evt.preventDefault();
-    // props.onEditProfile(values.username, values.email);
     handleProfile(values.username, values.email);
   }
 
@@ -59,7 +59,6 @@ function Profile({setIsError, setIsEdit, setIsLuck, ...props}) {
           value={values.username}
           isInputValid={isInputValid.username}
           error={errors.username}
-          // onChange={handleChange}
           onChange={(evt) => {
             handleChange(evt)
             setIsError(false)
@@ -74,11 +73,11 @@ function Profile({setIsError, setIsEdit, setIsLuck, ...props}) {
           value={values.email}
           isInputValid={isInputValid.email}
           error={errors.email}
-          // onChange={handleChange}
           onChange={(evt) => {
             handleChange(evt)
             setIsError(false)
           }}
+          pattern={EmailRegex}
           isEdit={props.isEdit}
         />
         </fieldset>

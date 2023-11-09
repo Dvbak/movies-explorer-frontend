@@ -2,7 +2,7 @@ import React from 'react';
 import SectionLogin from '../SectionLogin/SectionLogin';
 import Input from '../Input/Input';
 import useFormValidation from '../../hooks/useFormValidtion';
-// import WaitContext from '../../context/WaitContext';
+import { EmailRegex } from '../../utils/constants';
 
 function Login(props) {
   const { values, errors, isInputValid, isValid, handleChange, } = useFormValidation()
@@ -26,6 +26,7 @@ function Login(props) {
           handleChange(evt)
           props.setIsError(false)
         }}
+        pattern={EmailRegex}
         placeholder='Введите свою электронную почту'
       />
       <Input

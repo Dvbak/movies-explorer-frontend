@@ -2,6 +2,7 @@ import React from 'react';
 import Input from '../Input/Input';
 import SectionLogin from '../SectionLogin/SectionLogin';
 import useFormValidation from '../../hooks/useFormValidtion';
+import { EmailRegex } from '../../utils/constants';
 
 function Register(props) {
   const { values, errors, isInputValid, isValid, handleChange, } = useFormValidation()
@@ -41,6 +42,7 @@ function Register(props) {
           handleChange(evt)
           props.setIsError(false)
         }}
+        pattern={EmailRegex}
         placeholder='Введите электронную почту'
       />
       <Input
