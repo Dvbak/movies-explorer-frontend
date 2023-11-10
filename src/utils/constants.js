@@ -1,5 +1,5 @@
 const EmailRegex = "^\\S+@\\S+\\.\\S+$";
-const regPassword = "^\\w{8,}$";
+const RegPassword = "^\\w{8,}$";
 const DesctopScreen = 1279;
 const TabletScreen = 990;
 const MobileScreen = 606;
@@ -13,7 +13,7 @@ const StepMS = 2;
 
 export {
   EmailRegex,
-  regPassword,
+  RegPassword,
   DesctopScreen,
   TabletScreen,
   MobileScreen,

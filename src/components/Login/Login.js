@@ -2,14 +2,13 @@ import React from 'react';
 import SectionLogin from '../SectionLogin/SectionLogin';
 import Input from '../Input/Input';
 import useFormValidation from '../../hooks/useFormValidtion';
-import { EmailRegex, regPassword } from '../../utils/constants';
+import { EmailRegex, RegPassword } from '../../utils/constants';
 
 function Login(props) {
   const { values, errors, isInputValid, isValid, handleChange, } = useFormValidation()
 
   function onSubmit(evt) {
     evt.preventDefault();
-    // props.setIsWait(true);
     props.onLogin(values.email, values.password)
   }
 
@@ -41,7 +40,7 @@ function Login(props) {
           handleChange(evt)
           props.setIsError(false)
         }}
-        pattern={regPassword}
+        pattern={RegPassword}
         placeholder='Введите свой пароль'
       />
     </SectionLogin>

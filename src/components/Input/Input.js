@@ -34,6 +34,7 @@ function Input(props) {
               type={props.type}
               name={props.name}
               minLength={props.minLength || ''}
+              maxLength={props.maxLength || ''}
               className={`profile__input ${props.isInputValid === undefined || props.isInputValid ? '' : 'profile__input_invalid'}`}
               value={props.value || ''}
               onChange={props.onChange}

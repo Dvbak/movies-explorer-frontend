@@ -18,7 +18,6 @@ function Profile({setIsError, setIsEdit, setIsLuck, ...props}) {
 
   useEffect(() => {
     reset({ name: currentUser.name, email: currentUser.email })
-    console.log(currentUser);
   }, [reset, currentUser, props.isEdit]);
 
   useEffect(() => {
@@ -28,8 +27,6 @@ function Profile({setIsError, setIsEdit, setIsLuck, ...props}) {
   useEffect(() => {
     if (JSON.stringify(currentUser) === JSON.stringify(values)) {
       setIsFormValid(false);
-      console.log(JSON.stringify(currentUser))
-      console.log(JSON.stringify(values))
     } else {
       setIsFormValid(true);
     }
@@ -46,7 +43,6 @@ function Profile({setIsError, setIsEdit, setIsLuck, ...props}) {
         console.log(res);
         setIsEdit(false);
         setIsLuck(true);
-        console.log(currentUser);
       })
       .catch((err) => {
         setIsError(true);
@@ -70,7 +66,8 @@ function Profile({setIsError, setIsEdit, setIsLuck, ...props}) {
           name='name'
           type='text'
           title='Имя'
-          minLength='3'
+          minLength='2'
+          maxLength='30'
           value={values.name}
           isInputValid={isInputValid.name}
           error={errors.name}
