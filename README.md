@@ -10,5 +10,5 @@
 ### Ссылки на проект
 
 * Сайт: https://diplom.dvbak.nomoredomainsrocks.ru/
-* Пул реквест:
+* Пул реквест: https://github.com/Dvbak/movies-explorer-frontend/pull/2
 * IP <84.201.158.41>
