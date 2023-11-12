@@ -1,6 +1,7 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
+import { filterMovies, findShortMovies } from '../../utils/filterMovies';
 
 function SavedMovies({savedMovies, setIsError, ...props}) {
   const [isSelectedMovies, setIsSelectedMovies] = useState(savedMovies);
@@ -10,10 +11,9 @@ function SavedMovies({savedMovies, setIsError, ...props}) {
 
   const select = useCallback((word, isCheck, movies) => {
     setIsSearchWord(word);
-    setIsSelectedMovies(movies.filter((item) => {
-      const searchMovies = item.nameRU.toLowerCase().includes(word.toLowerCase());
-      return isCheck ? (searchMovies && item.duration <= 40) : searchMovies
-    }))
+    setIsSelectedMovies(
+      !isCheck ? filterMovies(word, movies)
+      : findShortMovies(filterMovies(word, movies)))
   }, []);
 
   function searchMovies(word) {

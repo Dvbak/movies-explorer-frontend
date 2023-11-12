@@ -1,3 +1,5 @@
+import { ServerAddress } from "./constants";
+
 class MainApi {
   constructor(options) {
     this._url = options.baseUrl;
@@ -86,9 +88,9 @@ class MainApi {
         duration: data.duration,
         description: data.description,
         year: data.year,
-        image: `https://api.nomoreparties.co${data.image.url}`,
+        image: ServerAddress + `${data.image.url}`,
         trailerLink: data.trailerLink,
-        thumbnail: `https://api.nomoreparties.co${data.image.formats.thumbnail.url}`,
+        thumbnail: ServerAddress + `${data.image.formats.thumbnail.url}`,
         movieId: data.id,
         nameRU: data.nameRU,
         nameEN: data.nameEN
@@ -107,8 +109,8 @@ class MainApi {
 }
 
 const mainApi = new MainApi({
-  baseUrl: 'https://api.diplom.dvbak.nomoredomainsrocks.ru',
-  // baseUrl: 'http://localhost:3000',
+  // baseUrl: 'https://api.diplom.dvbak.nomoredomainsrocks.ru',
+  baseUrl: 'http://localhost:4000',
 });
 
 export default mainApi;

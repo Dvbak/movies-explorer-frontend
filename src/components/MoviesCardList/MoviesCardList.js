@@ -66,11 +66,11 @@ function MoviesCardList({isSelectedMovies, ...props}) {
           : props.isServerError ?
           <span className='movies__search-return'>«Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз»</span>
           : !props.isFirstSearch  ?
-          <span className='movies__search-return'>«Ничего не найдено»</span>
+          <span className='movies__search-return'>«По этому запросу ничего не найдено»</span>
           : pathname === '/movies' ?
           <span className='movies__search-return'>«Выполните поиск фильмов»</span>
           :
-          <span className='movies__search-return'>«Нет сохранённых фильмов»</span>
+          <span className='movies__search-return'>«У Вас нет сохранённых фильмов»</span>
       }
       <div className="movies__next">
         {(pathname === '/movies' && !props.isWait && !props.isServerError) && <button

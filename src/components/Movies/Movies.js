@@ -20,7 +20,7 @@ function Moviies({setIsError, ...props}) {
     setIsSearchWord(word);
     setIsSelectedMovies(
       !isCheck ? filterMovies(word, movies)
-               : findShortMovies(movies))
+      : findShortMovies(filterMovies(word, movies)))
   }, []);
 
   function searchMovies(word) {

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from "react-router-dom";
 import convertTime from '../../utils/convertTime';
 import './MoviesCard.css';
+import { ServerAddress } from '../../utils/constants';
 
 
 function MoviesCard({savedMovies, data, ...props}) {
@@ -26,7 +27,7 @@ function MoviesCard({savedMovies, data, ...props}) {
   return (
     <li className="movies__card">
       <Link to={data.trailerLink} target='_blank' className="movies__link">
-        <img src={pathname === '/movies' ? `https://api.nomoreparties.co${data.image.url}` : data.image} alt={data.nameRU} className="movies__img" />
+        <img src={pathname === '/movies' ? ServerAddress + `${data.image.url}` : data.image} alt={data.nameRU} className="movies__img" />
       </Link>
       <div className="movies__box-subtitle">
         <div className="movies__inner-subtitle">

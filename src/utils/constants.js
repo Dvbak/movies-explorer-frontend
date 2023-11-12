@@ -1,5 +1,6 @@
 const EmailRegex = "^\\S+@\\S+\\.\\S+$";
 const RegPassword = "^\\w{8,}$";
+const ServerAddress = "https://api.nomoreparties.co";
 const DurationShortMovie = 40;
 const DesctopScreen = 1279;
 const TabletScreen = 990;
@@ -15,6 +16,7 @@ const StepMS = 2;
 export {
   EmailRegex,
   RegPassword,
+  ServerAddress,
   DurationShortMovie,
   DesctopScreen,
   TabletScreen,
