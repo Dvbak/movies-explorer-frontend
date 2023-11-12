@@ -7,7 +7,7 @@ function FilterCheckBox(props) {
 
   return (
     <label
-      className="search-form__label"
+      className={`search-form__label ${props.isError ? 'search-form__label-disabled' : ''}`}
       tabIndex={0}>
       <input type="checkbox" name="short films" className="search-form__checkbox" onChange={onChange} />
       <svg

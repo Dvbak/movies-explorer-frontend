@@ -70,7 +70,6 @@ function Moviies({setIsError, ...props}) {
         isSearchWord={isSearchWord}
         movies={isListMovies}
         savedMovies={props.savedMovies}
-        // isError={props.isError}
         setIsError={setIsError}
         select={select}
         searchMovies={searchMovies}

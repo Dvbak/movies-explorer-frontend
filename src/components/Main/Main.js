@@ -56,14 +56,12 @@ function Main(props) {
         addMovie={props.addMovie}
         setIsWait={props.setIsWait}
         setIsError={props.setIsError}
-        isError={props.isError}
       />
       : props.name === 'savedmovies' ?
       <SavedMovies
         savedMovies={props.savedMovies}
         onDelete={props.onDelete}
         setIsError={props.setIsError}
-        isError={props.isError}
       />
       : props.name === 'error404' &&
       <Error404/>

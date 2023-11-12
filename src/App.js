@@ -159,7 +159,6 @@ function App() {
                   element={ProtectedPage}
                   name='movies'
                   loggedIn={loggedIn}
-                  isError={isError}
                   setIsError={setIsError}
                   setIsWait={setIsWait}
                   savedMovies={savedMovies}
@@ -174,7 +173,6 @@ function App() {
                   element={ProtectedPage}
                   name='savedmovies'
                   loggedIn={loggedIn}
-                  isError={isError}
                   setIsError={setIsError}
                   savedMovies={savedMovies}
                   onDelete={handleDeleteMovie}

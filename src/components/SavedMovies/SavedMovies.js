@@ -43,7 +43,6 @@ function SavedMovies({savedMovies, setIsError, ...props}) {
         isListMovies={isSelectedMovies}
         savedMovies={savedMovies}
         movies={savedMovies}
-        isError={props.isError}
         setIsError={setIsError}
         select={select}
         searchMovies={searchMovies}

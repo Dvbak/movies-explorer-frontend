@@ -88,6 +88,7 @@ function SearchForm({savedMovies, isSearchWord, ...props}) {
       <FilterCheckBox
         isCheck={props.isCheck}
         checkShort={checkShort}
+        isError={isError}
       />
     </div>
   )
