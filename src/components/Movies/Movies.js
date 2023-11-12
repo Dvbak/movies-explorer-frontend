@@ -3,6 +3,8 @@ import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import moviesApi from '../../utils/MoviesApi';
 import WaitContext from '../../context/WaitContext';
+import putInLocalStorage from '../../utils/putInLocalStorage';
+import { filterMovies, findShortMovies } from '../../utils/filterMovies';
 
 function Moviies({setIsError, ...props}) {
   const isWait = useContext(WaitContext);
@@ -14,14 +16,11 @@ function Moviies({setIsError, ...props}) {
   const [isFirstSearch, setIsFirstSearch] = useState(true);
 
   const select = useCallback((word, isCheck, movies) => {
-    localStorage.setItem('inputword', JSON.stringify(word));
-    localStorage.setItem('shorts', JSON.stringify(isCheck));
-    localStorage.setItem('lotmovies', JSON.stringify(movies));
+    putInLocalStorage(word, isCheck, movies);
     setIsSearchWord(word);
-    setIsSelectedMovies(movies.filter((item) => {
-      const searchMovies = item.nameRU.toLowerCase().includes(word.toLowerCase());
-      return isCheck ? (searchMovies && item.duration <= 40) : searchMovies
-    }))
+    setIsSelectedMovies(
+      !isCheck ? filterMovies(word, movies)
+               : findShortMovies(movies))
   }, []);
 
   function searchMovies(word) {
@@ -50,19 +49,18 @@ function Moviies({setIsError, ...props}) {
   }, [setIsError])
 
   useEffect(() => {
-    if (localStorage.inputword && localStorage.shorts && localStorage.lotmovies) {
-      const word = JSON.parse(localStorage.inputword)
-      const isCheck = JSON.parse(localStorage.shorts)
-      const movies = JSON.parse(localStorage.lotmovies)
-      setIsServerError(false)
-      setIsFirstSearch(false)
-      setIsSearchWord(word)
-      setIsCheck(isCheck)
-      setIsListMovies(movies)
-      select(word, isCheck, movies)
+    if (localStorage.key_1 && localStorage.key_2 && localStorage.key_3) {
+      const word = JSON.parse(localStorage.key_1);
+      const isCheck = JSON.parse(localStorage.key_2);
+      const movies = JSON.parse(localStorage.key_3);
+      setIsServerError(false);
+      setIsFirstSearch(false);
+      setIsSearchWord(word);
+      setIsCheck(isCheck);
+      setIsListMovies(movies);
+      select(word, isCheck, movies);
     }
   }, [select])
-
 
   return (
     <section className="movies" aria-label="Фотогалерея фильмов">
@@ -72,7 +70,7 @@ function Moviies({setIsError, ...props}) {
         isSearchWord={isSearchWord}
         movies={isListMovies}
         savedMovies={props.savedMovies}
-        isError={props.isError}
+        // isError={props.isError}
         setIsError={setIsError}
         select={select}
         searchMovies={searchMovies}

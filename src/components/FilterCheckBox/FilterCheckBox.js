@@ -1,16 +1,6 @@
-// import React, { useState } from 'react';
 import './FilterCheckBox.css';
 
 function FilterCheckBox(props) {
-  // const [click, setClick] = useState(false);
-
-  // function onClick() {
-  //   if(click) {
-  //     setClick(false)
-  //   } else {
-  //     setClick(true)
-  //   }
-  // };
   function onChange() {
     props.checkShort();
   }
@@ -19,7 +9,7 @@ function FilterCheckBox(props) {
     <label
       className="search-form__label"
       tabIndex={0}>
-      <input type="checkbox" name="short films" className="search-form__checkbox" onChange={onChange}/>
+      <input type="checkbox" name="short films" className="search-form__checkbox" onChange={onChange} />
       <svg
         className="search-form__svg-check"
         xmlns="http://www.w3.org/2000/svg"
