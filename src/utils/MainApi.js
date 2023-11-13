@@ -109,8 +109,8 @@ class MainApi {
 }
 
 const mainApi = new MainApi({
-  // baseUrl: 'https://api.diplom.dvbak.nomoredomainsrocks.ru',
-  baseUrl: 'http://localhost:4000',
+  baseUrl: 'https://api.diplom.dvbak.nomoredomainsrocks.ru',
+  // baseUrl: 'http://localhost:4000',
 });
 
 export default mainApi;
