@@ -5,4 +5,14 @@ function putInLocalStorage(...item) {
   }
 }
 
-export default putInLocalStorage;
+function takeFromLocalStorage() {
+  const valuesLocStor = Object.values(localStorage).reverse();
+  let arrValues = [];
+  for (let i = 1; i <= (valuesLocStor.length - 1); i++) {
+    arrValues.push(JSON.parse(valuesLocStor[i]));
+  }
+  console.log(arrValues);
+  return arrValues;
+}
+
+export  { putInLocalStorage, takeFromLocalStorage };

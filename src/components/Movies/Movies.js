@@ -3,7 +3,7 @@ import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import moviesApi from '../../utils/MoviesApi';
 import WaitContext from '../../context/WaitContext';
-import putInLocalStorage from '../../utils/putInLocalStorage';
+import  { putInLocalStorage, takeFromLocalStorage } from '../../utils/putInLocalStorage';
 import { filterMovies, findShortMovies } from '../../utils/filterMovies';
 
 function Moviies({setIsError, ...props}) {
@@ -50,9 +50,7 @@ function Moviies({setIsError, ...props}) {
 
   useEffect(() => {
     if (localStorage.key_1 && localStorage.key_2 && localStorage.key_3) {
-      const word = JSON.parse(localStorage.key_1);
-      const isCheck = JSON.parse(localStorage.key_2);
-      const movies = JSON.parse(localStorage.key_3);
+      const [isCheck, word, movies] = takeFromLocalStorage();
       setIsServerError(false);
       setIsFirstSearch(false);
       setIsSearchWord(word);
