@@ -23,24 +23,35 @@ function App() {
   const [savedMovies, setSavedMovies] = useState([]);
   const [isCheckToken, setIsCheckToken] = useState(true);
 
+
   useEffect(() => {
     if (localStorage.token) {
-      Promise.all([mainApi.getUserData(localStorage.token), mainApi.getMovies(localStorage.token)])
-        .then(([userData, dataMovies]) => {
-          setSavedMovies(dataMovies.reverse())
-          setCurrentUser(userData)
-          setLoggedIn(true)
-          setIsCheckToken(false)
+      mainApi.getUserData(localStorage.token)
+        .then((userData) => {
+          setCurrentUser(userData);
+          setLoggedIn(true);
+          console.log(userData);
         })
         .catch((err) => {
-          console.error(`Ошибка загрузки страницы- ${err}`)
-          setIsCheckToken(false)
-          localStorage.clear()
+          console.error(`Ошибка при получении данных пользователя- ${err}`);
+          setLoggedIn(false);
+          localStorage.clear();
         })
-    } else {
-      setLoggedIn(false)
-      setIsCheckToken(false)
-      localStorage.clear()
+    }
+  }, [loggedIn])
+
+  useEffect(() => {
+    if (localStorage.token) {
+      mainApi.getMovies(localStorage.token)
+        .then((dataMovies) => {
+          setSavedMovies(dataMovies.reverse());
+          console.log(dataMovies);
+          setIsCheckToken(false);
+        })
+        .catch((err) => {
+          console.error(`Ошибка загрузки страницы- ${err}`);
+          setIsCheckToken(false);
+        })
     }
   }, [loggedIn])
 
@@ -54,7 +65,7 @@ function App() {
       })
       .catch((err) => {
         setIsError(true);
-        console.error(`Ошибка авторизации- ${err}`)
+        console.error(`Ошибка авторизации- ${err}`);
       })
       .finally(() => setIsWait(false))
   }
@@ -69,8 +80,8 @@ function App() {
         }
       })
       .catch((err) => {
-        setIsError(true)
-        console.error(`Ошибка регистрации- ${err}`)
+        setIsError(true);
+        console.error(`Ошибка регистрации- ${err}`);
       })
       .finally(() => setIsWait(false))
   }
