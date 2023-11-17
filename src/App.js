@@ -34,9 +34,11 @@ function App() {
         })
         .catch((err) => {
           console.error(`Ошибка при получении данных пользователя- ${err}`);
-          setLoggedIn(false);
-          localStorage.clear();
+
         })
+    } else {
+      setLoggedIn(false);
+      localStorage.clear();
     }
   }, [loggedIn])
 
@@ -52,6 +54,9 @@ function App() {
           console.error(`Ошибка загрузки страницы- ${err}`);
           setIsCheckToken(false);
         })
+    } else {
+      setLoggedIn(false);
+      setIsCheckToken(false);
     }
   }, [loggedIn])
 
