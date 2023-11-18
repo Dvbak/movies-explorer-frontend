@@ -13,6 +13,11 @@
   visibility: hidden;
 }
 
+.search-form__label-disabled {
+  pointer-events: none;
+  opacity: .5;
+}
+
 .search-form__svg-check {
   position: absolute;
 }

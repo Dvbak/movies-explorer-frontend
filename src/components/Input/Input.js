@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import './Input.css';
+import WaitContext from "../../context/WaitContext";
 
 function Input(props) {
+  const isWait = useContext(WaitContext);
+
   return (
     <>
       {props.componentName !== 'profile' ?
@@ -12,10 +15,11 @@ function Input(props) {
             type={props.type}
             name={props.name}
             minLength={props.minLength || ''}
+            maxLength={props.maxLength || ''}
             className={`login__input ${props.isInputValid === undefined || props.isInputValid ? '' : 'login__input_invalid'}`}
             value={props.value || ''}
             onChange={props.onChange}
-            disabled={props.isSend}
+            disabled={isWait}
             pattern={props.pattern}
             placeholder={props.placeholder}
           />
@@ -30,10 +34,11 @@ function Input(props) {
               type={props.type}
               name={props.name}
               minLength={props.minLength || ''}
+              maxLength={props.maxLength || ''}
               className={`profile__input ${props.isInputValid === undefined || props.isInputValid ? '' : 'profile__input_invalid'}`}
               value={props.value || ''}
               onChange={props.onChange}
-              disabled={props.isSend || !props.isEdit}
+              disabled={isWait || !props.isEdit}
               pattern={props.pattern}
               placeholder={props.placeholder}
             />

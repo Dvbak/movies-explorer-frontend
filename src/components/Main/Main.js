@@ -29,38 +29,38 @@ function Main(props) {
       : props.name === 'signin' ?
       <Login
         name={props.name}
-        isWait={props.isWait}
-        setIsWait={props.setIsWait}
+        onLogin={props.onLogin}
+        setIsError={props.setIsError}
       />
       : props.name ==='signup' ?
       <Register
         name={props.name}
-        isWait={props.isWait}
-        setIsWait={props.setIsWait}
+        onRegister={props.onRegister}
+        setIsError={props.setIsError}
       />
       : props.name === 'profile' ?
       <Profile
         name={props.name}
-        isError={props.isError}
+        logOut={props.logOut}
+        setCurrentUser={props.setCurrentUser}
         setIsError={props.setIsError}
+        setIsWait={props.setIsWait}
         isEdit={props.isEdit}
         setIsEdit={props.setIsEdit}
-        logOut={props.logOut}
-        isWait={props.isWait}
-        setIsWait={props.setIsWait}
+        isLuck={props.isLuck}
+        setIsLuck={props.setIsLuck}
       />
       : props.name === 'movies' ?
       <Moviies
-        isWait={props.isWait}
+        savedMovies={props.savedMovies}
+        addMovie={props.addMovie}
         setIsWait={props.setIsWait}
-        isError={props.isError}
         setIsError={props.setIsError}
       />
       : props.name === 'savedmovies' ?
       <SavedMovies
-        isWait={props.isWait}
-        setIsWait={props.setIsWait}
-        isError={props.isError}
+        savedMovies={props.savedMovies}
+        onDelete={props.onDelete}
         setIsError={props.setIsError}
       />
       : props.name === 'error404' &&
